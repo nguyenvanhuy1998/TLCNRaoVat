@@ -16,12 +16,16 @@ import {
   StatusBar,
 } from 'react-native';
 import LoginScreen from './src/screen/LoginScreen';
+import RegisterScreen from './src/screen/RegisterScreen';
+import ForgotPassword from './src/screen/ForgotPassword';
 
 
 const App = () => {
   return (
     <View style = {{flex:1}}>
-        <LoginScreen/>
+        {/* <LoginScreen/> */}
+        {/* <RegisterScreen/> */}
+        <ForgotPassword/>
     </View>
   );
 };
