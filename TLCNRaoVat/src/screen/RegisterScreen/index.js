@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, ImageBackground, Image, TextInput, TouchableOpacity } from 'react-native'
 import styles from './styles'
-import { background_Login, logo } from '../../images'
-export default class LoginScreen extends Component {
+import {background_Register} from '../../images/index'
+export default class RegisterScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
             phone: '',
-            password: ''
+            password: '',
+            fullName:''
+
         }
     }
     render() {
-        const { phone, password } = this.state
+        const { phone, password, fullName } = this.state
         const {navigation} = this.props
         return (
             <View style={styles.container}>
-                <ImageBackground source={background_Login} style={{ flex: 1 }}>
+                <ImageBackground source={background_Register} style={{ flex: 1 }}>
                     <View style={{ flex: 1, marginTop: 250 }}>
                         <TextInput style={styles.textInput}
                             onSubmitEditing={() => { this.secondTextInput.focus() }}
@@ -28,23 +30,30 @@ export default class LoginScreen extends Component {
                         />
                         <TextInput style={styles.textInput}
                             ref={(input) => { this.secondTextInput = input }}
+                            onSubmitEditing={() => { this.thirdTextInput.focus() }}
                             placeholder="Mật khẩu"
                             placeholderTextColor="white"
                             value={password}
                             onChangeText={(text) => this.setState({ password: text })}
                             secureTextEntry={true}
+                            returnKeyType='next'
+                        />
+                         <TextInput style={styles.textInput}
+                            ref={(input) => { this.thirdTextInput = input }}
+                            placeholder="Họ và Tên"
+                            placeholderTextColor="white"
+                            value={fullName}
+                            onChangeText={(text) => this.setState({ fullName: text })}
                             returnKeyType='go'
                         />
                         <TouchableOpacity style={styles.btnDangNhap}>
-                            <Text style={styles.textLogin}>ĐĂNG NHẬP</Text>
+                            <Text style={styles.textLogin}>ĐĂNG KÝ</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} onPress = {() =>  navigation.navigate('RegisterScreen')}>
-                            <Text>Bạn chưa có tài khoản?</Text>
-                            <Text style={styles.textRegister}>Đăng ký</Text>
+                        <TouchableOpacity onPress = {() => navigation.popToTop()} style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
+                            <Text>Bạn đã có tài khoản?</Text>
+                            <Text style={styles.textRegister}>Đăng nhập</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress = {() => navigation.navigate('ForgotPassword')} style={{ alignItems: 'center' }}>
-                            <Text style={styles.textRegister}>Quên mật khẩu?</Text>
-                        </TouchableOpacity>
+                       
 
                     </View>
                 </ImageBackground>

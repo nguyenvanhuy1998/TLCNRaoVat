@@ -15,19 +15,27 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './src/screen/LoginScreen';
+import RegisterScreen from './src/screen/RegisterScreen';
+import ForgotPassword from './src/screen/ForgotPassword';
+import StackNavigator from './src/navigators/StackNavigator';
 
-
+const Stack = createStackNavigator()
 const App = () => {
   return (
-    <View style = {{flex:1}}>
-        <LoginScreen/>
-    </View>
+    <NavigationContainer>
+        <StatusBar barStyle = 'light-content'/>
+        <StackNavigator/>
+    </NavigationContainer>
+
   );
 };
 
 const styles = StyleSheet.create({
-  
+
 });
 
 export default App;
