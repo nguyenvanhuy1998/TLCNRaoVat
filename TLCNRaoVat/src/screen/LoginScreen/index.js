@@ -12,6 +12,7 @@ export default class LoginScreen extends Component {
     }
     render() {
         const { phone, password } = this.state
+        const {navigation} = this.props
         return (
             <View style={styles.container}>
                 <ImageBackground source={background_Login} style={{ flex: 1 }}>
@@ -37,11 +38,11 @@ export default class LoginScreen extends Component {
                         <TouchableOpacity style={styles.btnDangNhap}>
                             <Text style={styles.textLogin}>ĐĂNG NHẬP</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} onPress = {() =>  navigation.navigate('RegisterScreen')}>
                             <Text>Bạn chưa có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng ký</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ alignItems: 'center' }}>
+                        <TouchableOpacity onPress = {() => navigation.navigate('ForgotPassword')} style={{ alignItems: 'center' }}>
                             <Text style={styles.textRegister}>Quên mật khẩu?</Text>
                         </TouchableOpacity>
 

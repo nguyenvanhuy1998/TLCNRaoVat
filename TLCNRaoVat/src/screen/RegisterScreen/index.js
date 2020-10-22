@@ -14,6 +14,7 @@ export default class RegisterScreen extends Component {
     }
     render() {
         const { phone, password, fullName } = this.state
+        const {navigation} = this.props
         return (
             <View style={styles.container}>
                 <ImageBackground source={background_Register} style={{ flex: 1 }}>
@@ -48,7 +49,7 @@ export default class RegisterScreen extends Component {
                         <TouchableOpacity style={styles.btnDangNhap}>
                             <Text style={styles.textLogin}>ĐĂNG KÝ</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
+                        <TouchableOpacity onPress = {() => navigation.popToTop()} style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
                             <Text>Bạn đã có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng nhập</Text>
                         </TouchableOpacity>

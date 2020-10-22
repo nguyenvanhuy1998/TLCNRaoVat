@@ -12,6 +12,7 @@ export default class ForgotPassword extends Component {
     }
     render() {
         const { phone } = this.state
+        const {navigation} = this.props
         return (
             <View style={styles.container}>
                 <ImageBackground source={background_Register} style={{ flex: 1 }}>
@@ -28,7 +29,7 @@ export default class ForgotPassword extends Component {
                         <TouchableOpacity style={styles.btnDangNhap}>
                             <Text style={styles.textLogin}>LẤY MẬT KHẨU</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
+                        <TouchableOpacity onPress = {() => navigation.navigate('RegisterScreen')} style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
                             <Text>Bạn chưa có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng ký</Text>
                         </TouchableOpacity>
