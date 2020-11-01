@@ -3,13 +3,15 @@ import { createStackNavigator } from '@react-navigation/stack'
 import {
     LoginScreen,
     RegisterScreen,
-    ForgotPassword
+    ForgotPassword,
+    HomeScreen
 } from '../screen'
+import Home from './TabbarNavigator'
 const Stack = createStackNavigator();
 export default StackNavigator = () => {
     return (
         <Stack.Navigator
-            initialRouteName="LoginScreen"
+            initialRouteName="Login"
             screenOptions={({ route }) => {
                 const animationEnabled = route.params && !route.params.animationDisable;
                 const animationTypeForReplace = route.params ? route.params.animationTypeForReplace : 'push';
@@ -20,10 +22,10 @@ export default StackNavigator = () => {
                     animationTypeForReplace
                 }
             }}>
-            
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+            <Stack.Screen name="Home" component = {Home}/>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        </Stack.Navigator >
+        </Stack.Navigator>
     )
 }
