@@ -7,9 +7,16 @@ export default class LoginScreen extends Component {
         super(props)
         this.state = {
             phone: '',
-            password: ''
+            password: '',
+            error:{}
         }
     }
+    _submitLogin = () => {
+       
+        
+
+    }
+ 
     render() {
         const { phone, password } = this.state
         const {navigation} = this.props
@@ -35,10 +42,10 @@ export default class LoginScreen extends Component {
                             secureTextEntry={true}
                             returnKeyType='go'
                         />
-                        <TouchableOpacity style={styles.btnDangNhap}>
+                        <TouchableOpacity style={styles.btnDangNhap} onPress = {() => navigation.replace('Home')}>
                             <Text style={styles.textLogin}>ĐĂNG NHẬP</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} onPress = {() =>  navigation.navigate('RegisterScreen')}>
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} onPress = {() =>  navigation.navigate('Register')}>
                             <Text>Bạn chưa có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng ký</Text>
                         </TouchableOpacity>
