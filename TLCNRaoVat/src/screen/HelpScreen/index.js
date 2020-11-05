@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 import styles from './styles'
+import Header from '../../components/Header'
 export default class HelpScreen extends Component {
     render() {
         return (
             <View style = {styles.container}>
-                <Text> textInComponent </Text>
+                  <Header noBack title = {'Hỗ trợ'}/>
             </View>
         )
     }

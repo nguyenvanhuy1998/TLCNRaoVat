@@ -1,4 +1,4 @@
-import { imageBatDongSan, imageDoTu, imageXeCo, imageThuCung } from "../images";
+import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat } from "../images";
 
 export const dataHome = [
     {
@@ -18,32 +18,32 @@ export const dataHome = [
     },
     {
         "id":4,
-        "image":imageDoTu,
+        "image":iconPet,
         "name":"Vật nuôi"
     },
     {
         "id":5,
-        "image":imageBatDongSan,
+        "image":iconThiCong,
         "name":"Thi công công trình"
     },
     {
         "id":6,
-        "image":imageBatDongSan,
+        "image":iconThoiTrang,
         "name":"Thời trang, đồ dùng cá nhân"
     },
     {
         "id":7,
-        "image":imageBatDongSan,
+        "image":iconMayCongNghiep,
         "name":"Máy công nghiệp"
     },
     {
         "id":8,
-        "image":imageBatDongSan,
+        "image":iconVantai,
         "name":"Vận tải"
     },
     {
         "id":9,
-        "image":imageBatDongSan,
+        "image":iconNoiThat,
         "name":"Nội ngoại thất, Đồ gia dụng"
     },
     {
