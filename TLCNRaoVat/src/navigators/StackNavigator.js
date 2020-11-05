@@ -4,7 +4,7 @@ import {
     LoginScreen,
     RegisterScreen,
     ForgotPassword,
-    HomeScreen
+    HomeScreen,
 } from '../screen'
 import Home from './TabbarNavigator'
 const Stack = createStackNavigator();
