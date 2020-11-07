@@ -18,6 +18,9 @@ export const iconThoiTrang = require('./image_thoitrang.png')
 export const iconVantai = require('./image_vantai.png')
 export const iconMayCongNghiep = require('./image_maycongnghiep.png')
 export const iconNoiThat = require('./image_noithat.png')
+export const iconTheThao = require('./image_thethao.png')
+export const iconViecLam = require('./image_vieclam.png')
+
 export const iconBack = require('./icon_back.png')
 
 

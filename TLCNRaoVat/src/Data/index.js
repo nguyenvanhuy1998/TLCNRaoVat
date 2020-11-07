@@ -1,4 +1,4 @@
-import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat } from "../images";
+import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam } from "../images";
 
 export const dataHome = [
     {
@@ -48,12 +48,12 @@ export const dataHome = [
     },
     {
         "id":10,
-        "image":imageBatDongSan,
+        "image":iconTheThao,
         "name":"Giải trí, thể thao, sở thích"
     },
     {
         "id":11,
-        "image":imageBatDongSan,
+        "image":iconViecLam,
         "name":"Việc làm, dịch vụ"
     },
     {
@@ -61,6 +61,51 @@ export const dataHome = [
         "image":imageBatDongSan,
         "name":"Mẹ và bé"
     }
-    
-
+]
+export const dataPost = [
+    {
+        "id":1,
+        "image":iconPet,
+        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
+        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
+        "price":"2900000",
+        "date":"2/11/2020",
+        "city":"Hà Nội"
+    },
+    {
+        "id":2,
+        "image":iconMayCongNghiep,
+        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
+        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
+        "price":"2900000",
+        "date":"2/11/2020",
+        "city":"Hà Nội"
+    },
+    {
+        "id":3,
+        "image":iconNoiThat,
+        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
+        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
+        "price":"2900000",
+        "date":"2/11/2020",
+        "city":"Hà Nội"
+    },
+    {
+        "id":4,
+        "image":iconThoiTrang,
+        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
+        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
+        "price":"2900000",
+        "date":"2/11/2020",
+        "city":"Hà Nội"
+    },
+    {
+        "id":5,
+        "image":iconTheThao,
+        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
+        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
+        "price":"2900000",
+        "date":"2/11/2020",
+        "city":"Hà Nội"
+    }
 ]
