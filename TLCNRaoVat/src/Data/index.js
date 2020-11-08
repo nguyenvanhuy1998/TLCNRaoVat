@@ -1,4 +1,4 @@
-import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam } from "../images";
+import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam, imageMevaBe } from "../images";
 
 export const dataHome = [
     {
@@ -58,7 +58,7 @@ export const dataHome = [
     },
     {
         "id":12,
-        "image":imageBatDongSan,
+        "image":imageMevaBe,
         "name":"Mẹ và bé"
     }
 ]
@@ -109,3 +109,85 @@ export const dataPost = [
         "city":"Hà Nội"
     }
 ]
+export const dataHelpCart = [
+    {
+        "id":1,
+        "content":"Các bước tìm kiếm một sản phẩm"
+    },
+    {
+        "id":2,
+        "content":"Mẹo tìm kiếm hiệu quả"
+    },
+    {
+        "id":3,
+        "content":"Làm thế nào để liêc lạc với người bán?"
+    },
+    {
+        "id":4,
+        "content":"Làm thế nào để báo cáo tin đăng?"
+    },
+    {
+        "id":5,
+        "content":"Làm thế nào để tìm được món hàng giá hời?"
+    },
+    {
+        "id":6,
+        "content":"Làm sao để chát với người bán?"
+    },
+    {
+        "id":7,
+        "content":"Đánh giá và nhận xét là gì?"
+    },
+    {
+        "id":8,
+        "content":"Hướng dẫn sử dụng tính năng Đánh giá và Nhận xét"
+    },
+    {
+        "id":9,
+        "content":"Tôi có quyền được xóa hoặc sửa Đánh giá và Nhận xét"
+    },
+]
+export const dataHelpShop = [
+    {
+        "id":1,
+        "content":"Đăng tin với ứng dụng Rao Vặt"
+    },
+    {
+        "id":2,
+        "content":"Tin chất lượng, bán hàng nhanh hơn"
+    },
+    {
+        "id":3,
+        "content":"Tôi phải làm gì nếu không đăng được tin?"
+    },
+    {
+        "id":4,
+        "content":"Làm sao tôi tìm và kiểm tra tình trạng tin?"
+    },
+    {
+        "id":5,
+        "content":"Tôi được đăng bao nhiêu tin với một tài khoản?"
+    },
+    {
+        "id":6,
+        "content":"Tôi cần làm gì để Xóa tin đã đăng?"
+    },
+    {
+        "id":7,
+        "content":"Tôi cần làm gì để Sửa tin đã đăng?"
+    },
+    {
+        "id":8,
+        "content":"Tôi cần làm gì để thay đổi thông tin cá nhân?"
+    },
+    {
+        "id":9,
+        "content":"Cách lấy lại mật khẩu tài khoản Rao Vặt?"
+    },
+    {
+        "id":10,
+        "content":"Làm sao để đăng ký tài khoản Rao Vặt?"
+    },
+   
+]
+

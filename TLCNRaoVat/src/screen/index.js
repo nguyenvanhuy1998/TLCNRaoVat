@@ -5,6 +5,8 @@ import HomeScreen from './HomeScreen'
 import PostScreen from './PostScreen'
 import HelpScreen from './HelpScreen'
 import ProfileScreen from './ProfileScreen'
+import HelpShop from './HelpShop'
+import HelpCart from './HelpCart'
 export {
     LoginScreen,
     RegisterScreen,
@@ -12,6 +14,8 @@ export {
     HomeScreen,
     PostScreen,
     HelpScreen,
-    ProfileScreen
+    ProfileScreen,
+    HelpShop,
+    HelpCart
 }
 

@@ -18,9 +18,18 @@ export const iconThoiTrang = require('./image_thoitrang.png')
 export const iconVantai = require('./image_vantai.png')
 export const iconMayCongNghiep = require('./image_maycongnghiep.png')
 export const iconNoiThat = require('./image_noithat.png')
-export const iconTheThao = require('./image_thethao.png')
+export const iconTheThao = require('./icon_thethao.png')
+export const imageMevaBe = require('./icon_mevabe.png')
+
 export const iconViecLam = require('./image_vieclam.png')
+export const iconShop = require('./icon_shop.png')
+export const iconCart = require('./icon_cart.png')
+
 
 export const iconBack = require('./icon_back.png')
+export const iconHelpContent = require('./icon_help.png')
+export const iconDownHelp = require('./icon_down_help.png')
+
+
 
 

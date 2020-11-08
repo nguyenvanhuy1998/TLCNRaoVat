@@ -4,7 +4,8 @@ import {
     LoginScreen,
     RegisterScreen,
     ForgotPassword,
-    HomeScreen,
+    HelpCart,
+    HelpShop,
 } from '../screen'
 import Home from './TabbarNavigator'
 const Stack = createStackNavigator();
@@ -26,6 +27,10 @@ export default StackNavigator = () => {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name = "HelpShop" component = {HelpShop}/>
+            <Stack.Screen name = "HelpCart" component = {HelpCart}/>
+            
+
         </Stack.Navigator>
     )
 }

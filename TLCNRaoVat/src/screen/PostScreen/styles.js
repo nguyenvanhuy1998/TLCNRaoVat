@@ -75,6 +75,10 @@ export default StyleSheet.create({
       textAlign:'center',
       color:colors.headerColor,
       fontWeight:'bold'
+    },
+    viewHeight:{
+      height: 0.5, width: "100%", backgroundColor: '#E5E5E5'
+
     }
     
 })
