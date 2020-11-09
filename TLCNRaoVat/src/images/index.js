@@ -29,6 +29,8 @@ export const iconCart = require('./icon_cart.png')
 export const iconBack = require('./icon_back.png')
 export const iconHelpContent = require('./icon_help.png')
 export const iconDownHelp = require('./icon_down_help.png')
+export const iconAvatar = require('./image_avatar.png')
+
 
 
 

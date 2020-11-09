@@ -65,15 +65,6 @@ export const dataHome = [
 export const dataPost = [
     {
         "id":1,
-        "image":iconPet,
-        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
-        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
-        "price":"2900000",
-        "date":"2/11/2020",
-        "city":"Hà Nội"
-    },
-    {
-        "id":2,
         "image":iconMayCongNghiep,
         "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
         "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
@@ -81,33 +72,8 @@ export const dataPost = [
         "date":"2/11/2020",
         "city":"Hà Nội"
     },
-    {
-        "id":3,
-        "image":iconNoiThat,
-        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
-        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
-        "price":"2900000",
-        "date":"2/11/2020",
-        "city":"Hà Nội"
-    },
-    {
-        "id":4,
-        "image":iconThoiTrang,
-        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
-        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
-        "price":"2900000",
-        "date":"2/11/2020",
-        "city":"Hà Nội"
-    },
-    {
-        "id":5,
-        "image":iconTheThao,
-        "postTitle":"Ald, cái, hơn 1 tuổi, đang gào đực",
-        "description":"Chuyển chỗ ở không thể đem bé theo nên cần tìm chủ mới cho bé",
-        "price":"2900000",
-        "date":"2/11/2020",
-        "city":"Hà Nội"
-    }
+ 
+   
 ]
 export const dataHelpCart = [
     {

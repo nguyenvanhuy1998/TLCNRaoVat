@@ -4,9 +4,8 @@ import styles from './styles'
 import Header from '../../components/Header'
 import NotLogin from '../../components/NotLogin'
 import { dataPost } from '../../Data'
-import { iconBack } from '../../images'
-import colors from '../../styles/colors'
 import { numberToString } from '../../util'
+import Button from '../../components/Button'
 
 export default class PostScreen extends Component {
     constructor(props) {
@@ -55,12 +54,9 @@ export default class PostScreen extends Component {
                     renderItem={this._renderItem}
                     keyExtractor={(item, index) => index.toString()}
                     showsVerticalScrollIndicator={false}
-                    refreshControl={<RefreshControl onRefresh={this.onRefresh} refreshing={refreshing} />}
+                     refreshControl={<RefreshControl onRefresh={this.onRefresh} refreshing={refreshing} />}
                 />
-                <TouchableOpacity style = {styles.viewDangBai} onPress = {() => alert('123')}>
-                <View style={[StyleSheet.absoluteFill,{ backgroundColor: colors.headerColor, opacity: 0.1}] } />
-                    <Text style = {styles.btnPost}>ĐĂNG BÀI</Text>
-                </TouchableOpacity>
+                <Button title = {'ĐĂNG BÀI'}/>
             </View>
         )
     }
