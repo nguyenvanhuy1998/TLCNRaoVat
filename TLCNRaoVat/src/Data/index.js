@@ -1,4 +1,4 @@
-import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam, imageMevaBe } from "../images";
+import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam, imageMevaBe, iconCanHo, iconNhaO, iconVanPhong } from "../images";
 
 export const dataHome = [
     {
@@ -156,4 +156,27 @@ export const dataHelpShop = [
     },
    
 ]
+export const dataTitleBatdongsan = [
+    {
+        "id":1,
+        "title":"Căn hộ",
+        "image":iconCanHo
+    },
+    {
+        "id":2,
+        "title":"Nhà ở",
+        "image":iconNhaO
+    },
+    {
+        "id":3,
+        "title":"Đất",
+        "image":iconNhaO
+    },
+    {
+        "id":4,
+        "title":"Văn phòng",
+        "image":iconVanPhong
+    }
+]
+
 
