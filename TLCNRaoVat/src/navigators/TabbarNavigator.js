@@ -43,7 +43,9 @@ export default function TabHome() {
                 activeTintColor: 'black',
                 inactiveTintColor: 'white',
                 style: { backgroundColor: colors.headerColor},
-                labelStyle:{fontSize:11, fontWeight:'600'}
+                labelStyle:{fontSize:11, fontWeight:'600'},
+                
+                
             
             }}
         >

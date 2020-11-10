@@ -12,4 +12,5 @@ export default Helper = {
       validateFullName(text) {
         return text.length >= 1;
       },
+    
 }

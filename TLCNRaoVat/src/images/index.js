@@ -12,3 +12,26 @@ export const iconHelp = require('./help_active.png')
 export const iconHelpLine = require('./help.png')
 export const iconProfileLine = require('./icon_profile.png')
 export const iconProfile = require('./icon_profile_active.png')
+export const iconPet = require('./image_thucung.png')
+export const iconThiCong = require('./image_congtrinh.png')
+export const iconThoiTrang = require('./image_thoitrang.png')
+export const iconVantai = require('./image_vantai.png')
+export const iconMayCongNghiep = require('./image_maycongnghiep.png')
+export const iconNoiThat = require('./image_noithat.png')
+export const iconTheThao = require('./icon_thethao.png')
+export const imageMevaBe = require('./icon_mevabe.png')
+
+export const iconViecLam = require('./image_vieclam.png')
+export const iconShop = require('./icon_shop.png')
+export const iconCart = require('./icon_cart.png')
+
+
+export const iconBack = require('./icon_back.png')
+export const iconHelpContent = require('./icon_help.png')
+export const iconDownHelp = require('./icon_down_help.png')
+export const iconAvatar = require('./image_avatar.png')
+
+
+
+
+
