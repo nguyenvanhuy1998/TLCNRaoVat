@@ -29,6 +29,24 @@ export default StyleSheet.create({
         left: 50,
         right: 50
     },
+    iconLeft:{
+        width: 50,
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    iconRight:{
+        width: 50,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
    
 
 

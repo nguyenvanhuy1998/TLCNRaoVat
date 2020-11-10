@@ -19,8 +19,11 @@ export default class HomeScreen extends Component {
         return dataList
     }
     _renderItem = ({item, index}) => {
+        const {navigation} = this.props
         return(
-            <TouchableOpacity style = {styles.item} onPress = {() => {alert('123')}}>
+            <TouchableOpacity style = {styles.item} onPress = {() => {
+                navigation.navigate("Batdongsan")
+            }}>
                 <Image source = {item.image} resizeMode = 'contain' style = {{width:84, height:84}}/>
                 <Text>{item.name}</Text>
             </TouchableOpacity>
