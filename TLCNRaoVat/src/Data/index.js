@@ -1,4 +1,4 @@
-import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam, imageMevaBe, iconCanHo, iconNhaO, iconVanPhong } from "../images";
+import { imageBatDongSan, imageDoTu, imageXeCo, iconPet, iconThiCong, iconThoiTrang, iconVantai, iconMayCongNghiep, iconNoiThat, iconTheThao, iconViecLam, imageMevaBe, iconCanHo, iconNhaO, iconVanPhong, iconNhaNguyenCan } from "../images";
 
 export const dataHome = [
     {
@@ -176,6 +176,50 @@ export const dataTitleBatdongsan = [
         "id":4,
         "title":"Văn phòng",
         "image":iconVanPhong
+    }
+]
+export const dataBatdongsan = [
+    {
+        "id":1,
+        "title":"Cho thuê nhà nguyên căn",
+        "image":iconNhaNguyenCan,
+        "price":10000000,
+        "city":"Thành phố Hồ Chí Minh"
+    },
+    {
+        "id":2,
+        "title":"Cho thuê nhà nguyên căn",
+        "image":iconNhaNguyenCan,
+        "price":10000000,
+        "city":"Thành phố Hồ Chí Minh"
+    },
+    {
+        "id":3,
+        "title":"Cho thuê nhà nguyên căn",
+        "image":iconNhaNguyenCan,
+        "price":10000000,
+        "city":"Thành phố Hồ Chí Minh"
+    },
+    {
+        "id":4,
+        "title":"Cho thuê nhà nguyên căn",
+        "image":iconNhaNguyenCan,
+        "price":10000000,
+        "city":"Thành phố Hồ Chí Minh"
+    },
+    {
+        "id":5,
+        "title":"Cho thuê nhà nguyên căn",
+        "image":iconNhaNguyenCan,
+        "price":10000000,
+        "city":"Thành phố Hồ Chí Minh"
+    },
+    {
+        "id":6,
+        "title":"Cho thuê nhà nguyên căn",
+        "image":iconNhaNguyenCan,
+        "price":10000000,
+        "city":"Thành phố Hồ Chí Minh"
     }
 ]
 

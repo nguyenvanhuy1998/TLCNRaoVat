@@ -34,8 +34,9 @@ export const iconAvatar = require('./image_avatar.png')
 export const iconCanHo = require('./icon_canho.png')
 export const iconNhaO = require('./icon_nhao.png')
 export const iconVanPhong= require('./icon_vanphong.png')
+export const iconDownFilter = require('./icon_down_filter.png')
 
-
+export const iconNhaNguyenCan = require('./image_nhanguyencan.png')
 
 
 
