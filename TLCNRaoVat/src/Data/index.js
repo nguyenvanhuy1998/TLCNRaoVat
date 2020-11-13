@@ -182,44 +182,74 @@ export const dataBatdongsan = [
     {
         "id":1,
         "title":"Cho thuê nhà nguyên căn",
-        "image":iconNhaNguyenCan,
+        "image_first":iconNhaNguyenCan,
+        "image_second":iconNhaNguyenCan,
+        "image_third":iconNhaNguyenCan,
         "price":10000000,
-        "city":"Thành phố Hồ Chí Minh"
+        "city":"Thành phố Hồ Chí Minh",
+        "email":"huygemini1998@gmail.com",
+        "address":"Khu phố 3, Phường Phú Thạnh, Thành phố Tuy Hòa, Phú Yên",
+        "detail":"Nhà mặt tiền Phú Yên 4x20 trệt 2 lầu đúc kiên cố nội thất cao cấp 2 mắt tiền trước sau. Sân xe hơi buôn bán mọi ngành nghề."
     },
     {
         "id":2,
         "title":"Cho thuê nhà nguyên căn",
-        "image":iconNhaNguyenCan,
+        "image_first":iconNhaNguyenCan,
+        "image_second":iconNhaNguyenCan,
+        "image_third":iconNhaNguyenCan,
         "price":10000000,
-        "city":"Thành phố Hồ Chí Minh"
+        "city":"Thành phố Hồ Chí Minh",
+        "email":"huygemini1998@gmail.com",
+        "address":"78 Phu Yen",
+        "detail":"Nhà mặt tiền Phú Yên 4x20 trệt 2 lầu đúc kiên cố nội thất cao cấp 2 mắt tiền trước sau. Sân xe hơi buôn bán mọi ngành nghề."
     },
     {
         "id":3,
         "title":"Cho thuê nhà nguyên căn",
-        "image":iconNhaNguyenCan,
+        "image_first":iconNhaNguyenCan,
+        "image_second":iconNhaNguyenCan,
+        "image_third":iconNhaNguyenCan,
         "price":10000000,
-        "city":"Thành phố Hồ Chí Minh"
+        "city":"Thành phố Hồ Chí Minh",
+        "email":"huygemini1998@gmail.com",
+        "address":"78 Phu Yen",
+        "detail":"Nhà mặt tiền Phú Yên 4x20 trệt 2 lầu đúc kiên cố nội thất cao cấp 2 mắt tiền trước sau. Sân xe hơi buôn bán mọi ngành nghề."
     },
     {
         "id":4,
         "title":"Cho thuê nhà nguyên căn",
-        "image":iconNhaNguyenCan,
+        "image_first":iconNhaNguyenCan,
+        "image_second":iconNhaNguyenCan,
+        "image_third":iconNhaNguyenCan,
         "price":10000000,
-        "city":"Thành phố Hồ Chí Minh"
+        "city":"Thành phố Hồ Chí Minh",
+        "email":"huygemini1998@gmail.com",
+        "address":"78 Phu Yen",
+        "detail":"Nhà mặt tiền Phú Yên 4x20 trệt 2 lầu đúc kiên cố nội thất cao cấp 2 mắt tiền trước sau. Sân xe hơi buôn bán mọi ngành nghề."
     },
     {
         "id":5,
         "title":"Cho thuê nhà nguyên căn",
-        "image":iconNhaNguyenCan,
+        "image_first":iconNhaNguyenCan,
+        "image_second":iconNhaNguyenCan,
+        "image_third":iconNhaNguyenCan,
         "price":10000000,
-        "city":"Thành phố Hồ Chí Minh"
+        "city":"Thành phố Hồ Chí Minh",
+        "email":"huygemini1998@gmail.com",
+        "address":"78 Phu Yen",
+        "detail":"Nhà mặt tiền Phú Yên 4x20 trệt 2 lầu đúc kiên cố nội thất cao cấp 2 mắt tiền trước sau. Sân xe hơi buôn bán mọi ngành nghề."
     },
     {
         "id":6,
         "title":"Cho thuê nhà nguyên căn",
-        "image":iconNhaNguyenCan,
+        "image_first":iconNhaNguyenCan,
+        "image_second":iconNhaNguyenCan,
+        "image_third":iconNhaNguyenCan,
         "price":10000000,
-        "city":"Thành phố Hồ Chí Minh"
+        "city":"Thành phố Hồ Chí Minh",
+        "email":"huygemini1998@gmail.com",
+        "address":"78 Phu Yen",
+        "detail":"Nhà mặt tiền Phú Yên 4x20 trệt 2 lầu đúc kiên cố nội thất cao cấp 2 mắt tiền trước sau. Sân xe hơi buôn bán mọi ngành nghề."
     }
 ]
 

@@ -17,13 +17,16 @@ export default class Batdongsan extends Component {
         )
     }
     _renderItemPrimary = ({ item, index }) => {
+        const {navigation} = this.props
         return (
-            <View style={styles.containerItemPrimary}>
-                <Image source={item.image} resizeMode = 'stretch' style={styles.imageBatdongsan} />
+            <TouchableOpacity onPress = {() =>navigation.navigate("BatdongsanDetail", {
+                data:item
+            })} style={styles.containerItemPrimary}>
+                <Image source={item.image_first} resizeMode = 'stretch' style={styles.imageBatdongsan} />
                 <Text numberOfLines={1} style={styles.titlePrimary}>{item.title}</Text>
                 <Text style={styles.price}>{numberToString(item.price)}</Text>
                 <Text style={styles.city}>{item.city}</Text>
-            </View>
+            </TouchableOpacity>
         )
     }
     render() {
