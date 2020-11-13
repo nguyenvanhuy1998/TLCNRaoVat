@@ -7,6 +7,8 @@ import HelpScreen from './HelpScreen'
 import ProfileScreen from './ProfileScreen'
 import HelpShop from './HelpShop'
 import HelpCart from './HelpCart'
+import Batdongsan from './Batdongsan'
+import BatdongsanDetail from './BatdongsanDetail'
 export {
     LoginScreen,
     RegisterScreen,
@@ -16,6 +18,9 @@ export {
     HelpScreen,
     ProfileScreen,
     HelpShop,
-    HelpCart
+    HelpCart,
+    Batdongsan,
+    BatdongsanDetail
+
 }
 

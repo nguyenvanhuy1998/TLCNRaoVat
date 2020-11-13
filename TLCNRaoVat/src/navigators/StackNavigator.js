@@ -6,6 +6,8 @@ import {
     ForgotPassword,
     HelpCart,
     HelpShop,
+    Batdongsan,
+    BatdongsanDetail,
 } from '../screen'
 import Home from './TabbarNavigator'
 const Stack = createStackNavigator();
@@ -29,6 +31,11 @@ export default StackNavigator = () => {
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
             <Stack.Screen name = "HelpShop" component = {HelpShop}/>
             <Stack.Screen name = "HelpCart" component = {HelpCart}/>
+            <Stack.Screen name = "Batdongsan" component = {Batdongsan}/>
+            <Stack.Screen name = "BatdongsanDetail" component = {BatdongsanDetail}/>
+
+
+            
             
 
         </Stack.Navigator>
