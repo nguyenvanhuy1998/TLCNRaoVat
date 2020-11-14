@@ -72,13 +72,31 @@ export default StyleSheet.create({
       overflow:'hidden',
     },
     btnPost:{
-      textAlign:'center',
-      color:colors.headerColor,
-      fontWeight:'bold'
+      position: 'absolute',
+      width: 173,
+      height: 48,
+      borderRadius: 24,
+      right: metrics.width / 4,
+      backgroundColor: colors.headerColor,
+      bottom: metrics.safePadding,
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     viewHeight:{
       height: 0.5, width: "100%", backgroundColor: '#E5E5E5'
 
+    },
+    containerPostEmpty:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    emptyText:{
+      fontSize:16,
+    },
+    dangbai:{
+      fontSize:16,
+      color:'white'
     }
     
 })

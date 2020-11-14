@@ -37,6 +37,8 @@ export const iconVanPhong= require('./icon_vanphong.png')
 export const iconDownFilter = require('./icon_down_filter.png')
 
 export const iconNhaNguyenCan = require('./image_nhanguyencan.png')
+export const iconPostEmpty = require('./post_empty.png')
+
 
 
 

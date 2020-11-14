@@ -34,19 +34,21 @@ export default StyleSheet.create({
         color: colors.colorRegular,
         lineHeight: 20,
         fontSize: 13,
-        marginBottom: 30
+        marginBottom: 24
     },
     viewButtonDangNhap:{
+        backgroundColor:'white',
+        borderRadius:8,
+        borderColor:colors.colorBorderOrange,
+        borderWidth:2,
         width:metrics.width/2,
-        padding:12,
-        borderRadius: 8,
-        overflow:'hidden',
-       
+        height:37,
+        justifyContent:'center',
+        alignItems:'center'
     },
     btnLogin:{
-        textAlign:'center',
-        color:'black',
-        fontWeight:'bold'
+        color:"#F7B500",
+        fontSize:16,
     }
     
     

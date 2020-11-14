@@ -3,5 +3,6 @@ export default{
     grayColor:'#B0BEC5',
     colorDisplay:'#455A64',
     colorRegular:'#607D8B',
-    colorButton:'#F64E60'
+    colorButton:'#F64E60',
+    colorBorderOrange:'#FFAA00'
 }

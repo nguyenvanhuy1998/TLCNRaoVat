@@ -12,8 +12,11 @@ export default class NotLogin extends Component {
                 <IconNotLogin style={styles.viewIcon} name='ios-person' />
                 <Text style={styles.titleError}>Rất tiếc</Text>
                 <Text style={styles.text}>Bạn cần đăng nhập để sử dụng tính năng này</Text>
-                <TouchableOpacity style = {styles.viewButtonDangNhap} onPress = {() => alert('123')}>
+                {/* <TouchableOpacity style = {styles.viewButtonDangNhap} onPress = {() => alert('123')}>
                 <View style={[StyleSheet.absoluteFill,{ backgroundColor: 'black', opacity: 0.1}] } />
+                    <Text style = {styles.btnLogin}>Đăng nhập</Text>
+                </TouchableOpacity> */}
+                <TouchableOpacity style = {styles.viewButtonDangNhap}>
                     <Text style = {styles.btnLogin}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>
