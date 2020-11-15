@@ -4,9 +4,9 @@ import { iconDownFilter } from '../../images'
 
 export default class FilterCity extends Component {
     render() {
-        const { onPress, title, type } = this.props
+        const { onPress, title, type, optionWidth } = this.props
         return (
-            <TouchableOpacity onPress={onPress} style={{ borderRightWidth: 1, width: 107, padding: 10 }}>
+            <TouchableOpacity onPress={onPress} style={{ borderRightWidth: 1, width: optionWidth, padding: 10 }}>
                 <Text style={{
                     fontSize: 12,
                     color: '#8B8B8B',

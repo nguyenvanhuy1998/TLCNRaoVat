@@ -47,8 +47,8 @@ export default class Batdongsan extends Component {
                 </View>
                 <ScrollView showsVerticalScrollIndicator = {false}>
                     <View style={{ backgroundColor: 'white', flexDirection: 'row' }}>
-                        <FilterCity title={"Tỉnh/Thành"} type="Tất cả" />
-                        <FilterCity title={"Số phòng"} type="Tất cả" />
+                        <FilterCity optionWidth = {107} title={"Tỉnh/Thành"} type="Tất cả" />
+                        <FilterCity optionWidth = {107} title={"Số phòng"} type="Tất cả" />
                     </View>
                     <FlatList
                         style={{ marginHorizontal: 16, paddingTop: 16 }}

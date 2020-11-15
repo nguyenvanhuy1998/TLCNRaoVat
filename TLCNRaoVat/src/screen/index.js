@@ -10,6 +10,8 @@ import HelpCart from './HelpCart'
 import Batdongsan from './Batdongsan'
 import BatdongsanDetail from './BatdongsanDetail'
 import PostStepFirst from './PostStepFirst'
+import PostStepSecond from './PostStepSecond'
+import PostStepThird from './PostStepThird'
 export {
     LoginScreen,
     RegisterScreen,
@@ -22,6 +24,8 @@ export {
     HelpCart,
     Batdongsan,
     BatdongsanDetail,
-    PostStepFirst
+    PostStepFirst,
+    PostStepSecond,
+    PostStepThird
 }
 

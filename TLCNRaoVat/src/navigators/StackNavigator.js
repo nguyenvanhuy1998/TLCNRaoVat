@@ -9,13 +9,15 @@ import {
     Batdongsan,
     BatdongsanDetail,
     PostStepFirst,
+    PostStepSecond,
+    PostStepThird,
 } from '../screen'
 import Home from './TabbarNavigator'
 const Stack = createStackNavigator();
 export default StackNavigator = () => {
     return (
         <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="PostStepThird"
             screenOptions={({ route }) => {
                 const animationEnabled = route.params && !route.params.animationDisable;
                 const animationTypeForReplace = route.params ? route.params.animationTypeForReplace : 'push';
@@ -35,11 +37,8 @@ export default StackNavigator = () => {
             <Stack.Screen name = "Batdongsan" component = {Batdongsan}/>
             <Stack.Screen name = "BatdongsanDetail" component = {BatdongsanDetail}/>
             <Stack.Screen name = "PostStepFirst" component = {PostStepFirst}/>
-
-
-            
-            
-
+            <Stack.Screen name = "PostStepSecond" component = {PostStepSecond}/>
+            <Stack.Screen name = "PostStepThird" component = {PostStepThird}/>
         </Stack.Navigator>
     )
 }
