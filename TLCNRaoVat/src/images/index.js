@@ -38,6 +38,7 @@ export const iconDownFilter = require('./icon_down_filter.png')
 
 export const iconNhaNguyenCan = require('./image_nhanguyencan.png')
 export const iconPostEmpty = require('./post_empty.png')
+export const iconCamera = require("./icon_camera.png")
 
 
 

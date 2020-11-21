@@ -73,7 +73,7 @@ export default class PostStepThird extends Component {
                         <Text style={styles.negotiated}>Thương lượng giá</Text>
                     </View>
                 </ScrollView>
-                <ButtonStep onPress={() => alert("123")} name="Tiếp theo" />
+                <ButtonStep onPress={() => navigation.navigate("PostStepFour")} name="Tiếp theo" />
             </View>
         )
     }

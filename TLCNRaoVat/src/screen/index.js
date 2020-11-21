@@ -12,6 +12,8 @@ import BatdongsanDetail from './BatdongsanDetail'
 import PostStepFirst from './PostStepFirst'
 import PostStepSecond from './PostStepSecond'
 import PostStepThird from './PostStepThird'
+import PostStepFour from './PostStepFour'
+import SplashScreen from './SplashScreen'
 export {
     LoginScreen,
     RegisterScreen,
@@ -26,6 +28,8 @@ export {
     BatdongsanDetail,
     PostStepFirst,
     PostStepSecond,
-    PostStepThird
+    PostStepThird,
+    PostStepFour,
+    SplashScreen
 }
 
