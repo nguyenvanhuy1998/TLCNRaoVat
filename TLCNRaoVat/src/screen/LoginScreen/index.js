@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import { background_Login, logo } from '../../images'
+import { BASE_URL } from '../../network/config'
+import helper from '../../helper'
+import AsyncStorage from "@react-native-community/async-storage";
+
 export default class LoginScreen extends Component {
     constructor(props) {
         super(props)
@@ -11,9 +15,48 @@ export default class LoginScreen extends Component {
             error:{}
         }
     }
-    _submitLogin = () => {
-       
+    _submitLogin =  () => {
+        const { phone, password } = this.state
+        const {navigation} = this.props
+        let newPhone = phone
+        if (newPhone.substr(0, 1) == '0') {
+            newPhone = newPhone.replace('0', '+84')
+        } else if (newPhone.substr(0, 2) == '84') {
+            newPhone = '+' + newPhone
+        } else if (newPhone.substr(0, 1) == '') {
+            newPhone = newPhone
+        } else if (newPhone.substr(0, 1) != '+' && newPhone.substr(0, 1) != '0' && newPhone.substr(0, 2) != '84') {
+            newPhone = '+84' + newPhone
+        }
+        let axios = require('axios');
+        let qs = require('qs');
+        var data = qs.stringify({
+         'phone': newPhone,
+        'passWord': password 
+        });
+        var config = {
+          method: 'post',
+          url: BASE_URL + '/login',
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data : data
+        };
         
+        axios(config)
+        .then(async (response)  =>  {
+            if(response.data.kq == 1){
+                await AsyncStorage.setItem('Token', response.data.Token)
+                navigation.navigate("Home")
+            }else {
+                helper.alert("Thông báo", response.data.errMsg)
+            }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      
+
 
     }
  
@@ -42,7 +85,7 @@ export default class LoginScreen extends Component {
                             secureTextEntry={true}
                             returnKeyType='go'
                         />
-                        <TouchableOpacity style={styles.btnDangNhap} onPress = {() => navigation.replace('Home')}>
+                        <TouchableOpacity style={styles.btnDangNhap} onPress = {this._submitLogin}>
                             <Text style={styles.textLogin}>ĐĂNG NHẬP</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} onPress = {() =>  navigation.navigate('Register')}>

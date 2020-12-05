@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { NavigationHelpersContext } from '@react-navigation/native'
 export default class NotLogin extends Component {
     render() {
-        const {navigation} = this.props
+        const {onPress} = this.props
         return (
             <View style={styles.container}>
                 <IconNotLogin style={styles.viewIcon} name='ios-person' />
@@ -16,7 +16,7 @@ export default class NotLogin extends Component {
                 <View style={[StyleSheet.absoluteFill,{ backgroundColor: 'black', opacity: 0.1}] } />
                     <Text style = {styles.btnLogin}>Đăng nhập</Text>
                 </TouchableOpacity> */}
-                <TouchableOpacity style = {styles.viewButtonDangNhap}>
+                <TouchableOpacity style = {styles.viewButtonDangNhap} onPress = {onPress}>
                     <Text style = {styles.btnLogin}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>

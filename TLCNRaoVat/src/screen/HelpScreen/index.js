@@ -11,11 +11,11 @@ export default class HelpScreen extends Component {
         return (
             <View style = {styles.container}>
                   <Header noBack title = {'Hỗ trợ'}/>
-                  <View style = {{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:16}}>
+                  {/* <View style = {{flex:1, justifyContent:'center', alignItems:'center', paddingHorizontal:16}}>
                        <HelpTitle onPress = {() => navigation.navigate('HelpShop') } image = {iconShop} title = {"Tôi là người bán"} content = {"Những mẹo vặt, các hướng dẫn giúp bán hàng nhanh chóng và tiện lợi trên  Rao Vặt"}/>
                        <HelpTitle onPress = {() => navigation.navigate('HelpCart') } image = {iconCart} title = {"Tôi là người mua"} content = {"Những mẹo vặt, các hướng dẫn giúp mua hàng nhanh chóng và tiện lợi trên Rao Vặt "}/>
-                  </View>
-                  {/* <NotLogin/> */}
+                  </View> */}
+                  <NotLogin/>
             </View>
         )
     }

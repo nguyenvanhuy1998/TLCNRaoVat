@@ -52,7 +52,8 @@ export default class PostScreen extends Component {
         return (
             <View style={styles.container}>
                 <Header noBack title={'Bài đăng'} />
-                {
+                <NotLogin/>
+                {/* {
                     !dataPost.length ? <View style={styles.containerPostEmpty}>
                         <Image source={iconPostEmpty} style={{ marginBottom: 15 }} />
                         <Text style={styles.emptyText}>Bạn chưa có bài đăng nào</Text>
@@ -67,7 +68,7 @@ export default class PostScreen extends Component {
                 }
                 <TouchableOpacity style={styles.btnPost} onPress = {()=> navigation.navigate("PostStepFirst")}>
                     <Text style={styles.dangbai}>ĐĂNG BÀI</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
         )

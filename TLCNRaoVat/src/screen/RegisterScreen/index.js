@@ -3,6 +3,9 @@ import { Text, StyleSheet, View, ImageBackground, Image, TextInput, TouchableOpa
 import styles from './styles'
 import { background_Register } from '../../images/index'
 import helper from '../../helper'
+import Loader from '../../components/Loader'
+import axios from 'axios'
+import { BASE_URL } from '../../network/config'
 export default class RegisterScreen extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +23,7 @@ export default class RegisterScreen extends Component {
         }
     }
     _register = () => {
+
         const { navigation } = this.props
         const { phone, passWord, fullName } = this.state.register
         const { register } = this.state
@@ -37,27 +41,35 @@ export default class RegisterScreen extends Component {
             ...register,
             phone: newPhone
         }
-        // console.log("Data", data)
-
         if (this.validateData(data)) {
-            console.log("Data", data.phone, data.fullName, data.passWord)
-            console.log(typeof (data.phone)),
-                fetch('http://localhost:3000/register', {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        phone: data.phone,
-                        passWord: data.passWord,
-                        fullName: data.fullName
-                    })
+            let axios = require('axios')
+            let qs = require('qs')
+            let dataRegister = qs.stringify({
+                'phone': data.phone,
+                'passWord': data.passWord,
+                'fullName': data.fullName
+            })
+            let config = {
+                method: 'post',
+                url: BASE_URL + '/register',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: dataRegister
+            }
+            axios(config)
+                .then(res => {
+                    if (res.data.kq == 1) {
+                        helper.alert("Thông báo", "Đăng ký thành công")
+                    } else {
+                        helper.alert("Thông báo", res.data.errMsg)
+                    }
                 })
-                    .then(res => res.json())
-                    .then(json => console.log("json123", json))
-        } else {
-            // alert("Không hợp lệ")
+                .catch(error => {
+                    console.log('====================================');
+                    console.log("errorRegister", error);
+                    console.log('====================================');
+                })
         }
     }
 
@@ -77,6 +89,7 @@ export default class RegisterScreen extends Component {
 
     render() {
         const { register, error } = this.state
+
         const { navigation } = this.props
         return (
             <View style={styles.container}>

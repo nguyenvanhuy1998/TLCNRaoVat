@@ -8,6 +8,8 @@ target 'TLCNRaoVat' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
+
   target 'TLCNRaoVatTests' do
     inherit! :complete
     # Pods for testing
