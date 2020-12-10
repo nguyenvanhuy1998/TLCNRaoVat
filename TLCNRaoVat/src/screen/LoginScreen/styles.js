@@ -26,6 +26,13 @@ export default StyleSheet.create({
     },
     textRegister:{
       color:'white', fontWeight:'600', marginLeft:4
+    },
+    textError:{
+      textAlign:'center',
+      fontSize: 12,
+      fontWeight: '400',
+      color:'red',
+      marginBottom:16,
     }
     
 })

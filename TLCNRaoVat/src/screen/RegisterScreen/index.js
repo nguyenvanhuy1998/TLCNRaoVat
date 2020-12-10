@@ -60,7 +60,7 @@ export default class RegisterScreen extends Component {
             axios(config)
                 .then(res => {
                     if (res.data.kq == 1) {
-                        helper.alert("Thông báo", "Đăng ký thành công")
+                        helper.alert("Thông báo", "Đăng ký thành công", () => navigation.pop())
                     } else {
                         helper.alert("Thông báo", res.data.errMsg)
                     }
@@ -143,7 +143,7 @@ export default class RegisterScreen extends Component {
                         <TouchableOpacity style={styles.btnDangNhap} onPress={this._register}>
                             <Text style={styles.textLogin}>ĐĂNG KÝ</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.popToTop()} style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
+                        <TouchableOpacity onPress={() => navigation.pop()} style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }}>
                             <Text>Bạn đã có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng nhập</Text>
                         </TouchableOpacity>

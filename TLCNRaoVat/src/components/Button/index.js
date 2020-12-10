@@ -4,9 +4,9 @@ import colors from '../../styles/colors'
 
 export default class Button extends Component {
     render() {
-        const { title } = this.props
+        const { title, onPress } = this.props
         return (
-            <TouchableOpacity style={styles.viewDangBai} onPress={() => alert('123')}>
+            <TouchableOpacity style={styles.viewDangBai} onPress={onPress}>
                 <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.headerColor, opacity: 0.1 }]} />
                 <Text style={styles.btnPost}>{title}</Text>
             </TouchableOpacity>

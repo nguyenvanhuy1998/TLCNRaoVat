@@ -5,6 +5,7 @@ import { background_Login, logo } from '../../images'
 import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
 import AsyncStorage from "@react-native-community/async-storage";
+import Loader from '../../components/Loader'
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class LoginScreen extends Component {
         this.state = {
             phone: '',
             password: '',
-            error:{}
+            error:''
         }
     }
     _submitLogin =  () => {
@@ -42,14 +43,17 @@ export default class LoginScreen extends Component {
           },
           data : data
         };
-        
+        Loader.show()
         axios(config)
         .then(async (response)  =>  {
+            Loader.hide()
             if(response.data.kq == 1){
                 await AsyncStorage.setItem('Token', response.data.Token)
-                navigation.navigate("Home")
+                navigation.pop()
             }else {
-                helper.alert("Thông báo", response.data.errMsg)
+                this.setState({
+                    error: response.data.errMsg
+                })
             }
         })
         .catch(function (error) {
@@ -61,7 +65,7 @@ export default class LoginScreen extends Component {
     }
  
     render() {
-        const { phone, password } = this.state
+        const { phone, password, error } = this.state
         const {navigation} = this.props
         return (
             <View style={styles.container}>
@@ -88,7 +92,11 @@ export default class LoginScreen extends Component {
                         <TouchableOpacity style={styles.btnDangNhap} onPress = {this._submitLogin}>
                             <Text style={styles.textLogin}>ĐĂNG NHẬP</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} onPress = {() =>  navigation.navigate('Register')}>
+                        {
+                            !error ? null :  <Text style = {styles.textError}>{error}</Text>
+                        }
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 16 }} 
+                        onPress = {() =>  navigation.navigate('Register')}>
                             <Text>Bạn chưa có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng ký</Text>
                         </TouchableOpacity>

@@ -15,14 +15,13 @@ import helper from '../../helper'
 export default class ProfileScreen extends Component {
     constructor(props) {
         super(props)
+        this._loadData()
         this.state = {
-            name: "Huy Nguyễn",
+            name: "",
             user:null
         }
     }
-    // Check login
-    // Nếu chưa login thì hiển thị màn hình login
-    async componentDidMount() {
+    _loadData =  async() => {
         try {
             await AsyncStorage.getItem('Token')
                 .then(resultToken => {
@@ -48,7 +47,45 @@ export default class ProfileScreen extends Component {
                                 user:res.data.User
                             })
                         }else {
-                            helper.alert("Thông báo", res.data.errMsg)
+                            console.log(res.data.errMsg)
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+                })
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+  
+    
+    _logout =  async () => {
+        const {navigation} = this.props
+        try {
+            await AsyncStorage.getItem('Token')
+                .then(resultToken => {
+                    // VerifyToken
+                    let axios = require('axios')
+                    let qs = require('qs')
+                    let data =  qs.stringify({
+                        'Token':resultToken
+                    })
+                    var config = {
+                        method:'post',
+                        url:BASE_URL + '/logout',
+                        headers: { 
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        data:data
+                    }
+                    axios(config)
+                    .then(async (res) =>  {
+                        if(res.data.kq == 1){
+                           await AsyncStorage.removeItem("Token")
+                            helper.alert("Thông báo",res.data.errMsg, () => navigation.replace("Login"))
+                        }else {
+                            console.log(res.data.errMsg)
                         }
                     })
                     .catch((error) => {
@@ -79,21 +116,21 @@ export default class ProfileScreen extends Component {
                                     <Text style={{ fontSize: 12, color: colors.colorDisplay, fontWeight: '600', marginBottom: 4 }}>Họ và tên</Text>
                                     <TextInput
                                         style={{ fontSize: 14 }}
-                                        placeholder={"Huy Nguyễn"}
+                                        placeholder={"Nhập họ và tên"}
                                         placeholderTextColor={'#C4C4C4'}
                                         onChangeText={(text) => { this.setState({ name: text }) }}
-                                        value={name}
+                                        value={!user.fullName? name: user.fullName}
                                         blurOnSubmit={false}
                                     />
                                 </View>
                             </View>
-                            <InforItem title={'Số điện thoại'} primary={'Thêm số điện thoại'} />
-                            <InforItem title={'Email'} primary={'Thêm địa chỉ email'} />
-                            <InforItem title={'Địa chỉ'} primary={'Thêm địa chỉ'} />
-                            <InforItem title={'Mật khẩu '} primary={'Đổi mật khẩu'} />
-                            <InforItem title={'Giới tính'} primary={'Chưa có thông tin'} />
-                            <InforItem title={'Ngày, tháng, năm sinh'} primary={'Chưa có thông tin'} />
-                            <Button title={'ĐĂNG XUẤT'} />
+                            <InforItem title={'Số điện thoại'} primary={!user.phone ? "": user.phone} />
+                            <InforItem title={'Email'} primary={!user.email ? '': user.email} />
+                            <InforItem title={'Địa chỉ'} primary={!user.address ? '' : user.address} />
+                            <InforItem title={'Mật khẩu '} primary={''} />
+                            <InforItem title={'Giới tính'} primary={!user.sex ? '': user.sex} />
+                            <InforItem title={'Ngày, tháng, năm sinh'} primary={!user.birthday ? '': user.birthday} />
+                            <Button title={'ĐĂNG XUẤT'} onPress = {this._logout}/>
                         </ScrollView>
                         :
                         <NotLogin onPress={() => navigation.navigate("Login")} />
