@@ -12,17 +12,18 @@ export default class PostStepThird extends Component {
             title: "",
             description: "",
             price: "",
-            address: ""
+            address: "",
+            phone:"",
             // title:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
     }
     render() {
         const { navigation } = this.props
-        const { title, description, price, address } = this.state
+        const { title, description, price, address, phone } = this.state
         return (
             <View style={styles.container}>
                 <Header onPress={() => navigation.pop()} title="Cập nhật thông tin" />
-                <ScrollView style={styles.containerScroll} >
+                <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator = {false} alwaysBounceVertical = {false}>
                     <ViewTextInputPost
                         marginTop={30}
                         title="Tiêu đề bài đăng:"
@@ -44,6 +45,7 @@ export default class PostStepThird extends Component {
                         value={price}
                         onChangeText={(text) => this.setState({ price: text })}
                     />
+                   
                     <View style={styles.filterContainer}>
                         <Text style={styles.city}>Tỉnh/Thành Phố</Text>
                         <View style={styles.selectCity}>
@@ -57,6 +59,13 @@ export default class PostStepThird extends Component {
                         placeholder="Nhập địa chỉ"
                         value={address}
                         onChangeText={(text) => this.setState({ address: text })}
+                    />
+                      <ViewTextInputPost
+                        marginTop={30}
+                        title="Số điện thoại:"
+                        placeholder="Nhập số điện thoại"
+                        value={phone}
+                        onChangeText={(text) => this.setState({ phone: text })}
                     />
                     <View style={styles.viewSelect}>
                         <View style={styles.viewActive}>

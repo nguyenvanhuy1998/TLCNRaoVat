@@ -4,18 +4,25 @@ import { iconCamera } from '../../images'
 
 export default class InsertImage extends Component {
     render() {
-        const {onPress, marginHorizontal} = this.props
+        const { onPress, marginHorizontal, haveImage, urlImage } = this.props
         return (
-            <TouchableOpacity onPress = {onPress} style={{...styles.viewPrimaryImage, marginHorizontal:marginHorizontal}}>
-                <Image source={iconCamera} />
-                <Text style={styles.insertImage}>Thêm hình</Text>
+            <TouchableOpacity onPress={onPress} style={{ ...styles.viewPrimaryImage, marginHorizontal: marginHorizontal }}>
+                {
+                    haveImage ? <Image source={urlImage} />
+                        :
+                        <View>
+                            <Image source={iconCamera} />
+                            <Text style={styles.insertImage}>Thêm hình</Text>
+                        </View>
+
+                }
             </TouchableOpacity>
         )
     }
 }
 
 const styles = StyleSheet.create({
-   
+
     viewPrimaryImage: {
         borderRadius: 8,
         borderColor: '#F7B500',
