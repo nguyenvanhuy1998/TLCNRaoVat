@@ -4,22 +4,35 @@ import styles from './styles'
 import Header from '../../components/Header'
 import NotLogin from '../../components/NotLogin'
 import { iconAvatar } from '../../images'
-import colors from '../../styles/colors'
 import InforItem from '../../components/InforItem'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import Button from '../../components/Button'
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
 import Loader from '../../components/Loader'
+import ImagePicker from 'react-native-image-picker';
+import {dateToString} from '../../util'
+import Button from '../../components/Button'
 
+const options = {
+    title: "Chọn hình ảnh",
+    cancelButtonTitle: "Hủy",
+    takePhotoButtonTitle: "Chụp hình",
+    chooseFromLibraryButtonTitle: "Chọn từ thư viện",
+    maxWidth: 500, maxHeight: 500,
+    storageOptions: {
+        skipBackup: true,
+        path: 'images',
+    },
+};
 export default class ProfileScreen extends Component {
     constructor(props) {
         super(props)
         this._getToken()
         this.state = {
             name: "",
-            user: null
+            user: null,
+            filePath: ''
         }
     }
 
@@ -33,7 +46,7 @@ export default class ProfileScreen extends Component {
     componentDidFocus = () => {
         this._getToken()
     }
-   
+
     _getToken = async () => {
         try {
             await AsyncStorage.getItem('Token')
@@ -109,8 +122,21 @@ export default class ProfileScreen extends Component {
             console.log("error", error)
         }
     }
+    _changeAvatar = () => {
+        ImagePicker.showImagePicker(options, (response) => {
+            if (!response.didCancel && !response.error) {
+                this.setState({
+                    filePath: response
+                })
+
+            }
+        })
+    }
     render() {
-        const { name, user } = this.state
+        const { name, user, filePath } = this.state
+        console.log('====================================');
+        console.log("user", user);
+        console.log('====================================');
         const { navigation } = this.props
         return (
             <View style={styles.container}>
@@ -118,28 +144,20 @@ export default class ProfileScreen extends Component {
                 {
                     user != null
                         ?
-                        <ScrollView alwaysBounceVertical={false}>
-                            <View style={{ flexDirection: 'row', padding: 16 }}>
-                                <Image source={iconAvatar} />
-                                <View style={{ marginLeft: 8, padding: 8, flex: 1, borderColor: 'gray', borderWidth: 1, borderRadius: 8 }}>
-                                    <Text style={{ fontSize: 12, color: colors.colorDisplay, fontWeight: '600', marginBottom: 4 }}>Họ và tên</Text>
-                                    <TextInput
-                                        style={{ fontSize: 14 }}
-                                        placeholder={"Nhập họ và tên"}
-                                        placeholderTextColor={'#C4C4C4'}
-                                        onChangeText={(text) => { this.setState({ name: text }) }}
-                                        value={!user.fullName ? name : user.fullName}
-                                        blurOnSubmit={false}
-                                    />
+                        <ScrollView style={{ backgroundColor: '#ECEEEF' }} alwaysBounceVertical={false}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 16 }}>
+                                <TouchableOpacity onPress={this._changeAvatar}>
+                                    <Image style={{ width: 65, height: 65, borderRadius: 32.5 }} resizeMode='contain' source={filePath == '' ? iconAvatar : { uri: filePath.uri }} />
+                                </TouchableOpacity>
+                                <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 4 }}>Số điện thoại</Text>
+                                    <Text>{user?.phone}</Text>
                                 </View>
                             </View>
-                            <InforItem title={'Số điện thoại'} primary={!user.phone ? "" : user.phone} />
-                            <InforItem title={'Email'} primary={!user.email ? '' : user.email} />
-                            <InforItem title={'Địa chỉ'} primary={!user.address ? '' : user.address} />
-                            <InforItem title={'Mật khẩu '} primary={''} />
-                            <InforItem title={'Giới tính'} primary={!user.sex ? '' : user.sex} />
-                            <InforItem title={'Ngày, tháng, năm sinh'} primary={!user.birthday ? '' : user.birthday} />
-                            <Button title={'ĐĂNG XUẤT'} onPress={this._logout} />
+                           <InforItem title = "Ngày tham gia" nameIcon = "calendar" content = {dateToString(user?.registerDate)}/>
+                           <InforItem title = "Đổi mật khẩu" nameIcon = "lock-closed" onPress = {() => navigation.navigate("123")}/>
+                           <InforItem title = "Cập nhật thông tin" nameIcon = "refresh-circle" onPress = {() => navigation.navigate("UpdateUser")}/>
+                           <Button title={'ĐĂNG XUẤT'} onPress={this._logout} />
                         </ScrollView>
                         :
                         <NotLogin onPress={() => navigation.navigate("Login")} />

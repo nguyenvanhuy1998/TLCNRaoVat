@@ -7,7 +7,6 @@ export default class Button extends Component {
         const { title, onPress } = this.props
         return (
             <TouchableOpacity style={styles.viewDangBai} onPress={onPress}>
-                <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.headerColor, opacity: 0.1 }]} />
                 <Text style={styles.btnPost}>{title}</Text>
             </TouchableOpacity>
         )
@@ -16,16 +15,17 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
     viewDangBai: {
+        backgroundColor:colors.headerColor,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
-        borderRadius: 8,
-        overflow: 'hidden',
+        marginHorizontal:16,
+        marginTop:16,
+        borderRadius:8,
     },
     btnPost: {
         textAlign: 'center',
-        color: colors.headerColor,
-        fontWeight: 'bold'
+        color: 'white',
     },
 
 })

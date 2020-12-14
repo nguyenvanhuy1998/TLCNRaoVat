@@ -73,10 +73,10 @@ export default StyleSheet.create({
     },
     btnPost:{
       position: 'absolute',
-      width: 173,
+      width: metrics.width - 32,
       height: 48,
-      borderRadius: 24,
-      right: metrics.width / 4,
+      borderRadius: 8,
+      left:16,
       backgroundColor: colors.headerColor,
       bottom: metrics.safePadding,
       justifyContent: 'center',

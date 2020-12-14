@@ -13,6 +13,7 @@ import {
     PostStepThird,
     PostStepFour,
     SplashScreen,
+    UpdateUser,
 } from '../screen'
 import Home from './TabbarNavigator'
 const Stack = createStackNavigator();
@@ -44,6 +45,7 @@ export default StackNavigator = () => {
             <Stack.Screen name="PostStepSecond" component={PostStepSecond} />
             <Stack.Screen name="PostStepThird" component={PostStepThird} />
             <Stack.Screen name="PostStepFour" component={PostStepFour} />
-        </Stack.Navigator>
+            <Stack.Screen name="UpdateUser" component = {UpdateUser}/>
+        </Stack.Navigator> 
     )
 }

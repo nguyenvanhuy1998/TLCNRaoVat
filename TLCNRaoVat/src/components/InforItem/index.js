@@ -5,14 +5,21 @@ import IconRight from 'react-native-vector-icons/Ionicons'
 
 export default class InforItem extends Component {
     render() {
-        const { title, primary } = this.props
+        const {nameIcon, title, content, disabled, onPress } = this.props
         return (
-            <TouchableOpacity style={styles.containerInfo}>
-                <View style={{}}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.primary}>{primary}</Text>
+            <TouchableOpacity style={{
+                marginTop: 10,
+                alignItems: 'center',
+                backgroundColor: 'white',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 8
+            }} disabled = {disabled} onPress = {onPress}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <IconRight name={nameIcon} color={colors.colorDisplay} style={{ fontSize: 20 }} />
+                <Text style={{ marginLeft: 8, fontSize: 16 }}>{title}</Text>
                 </View>
-                <IconRight name="chevron-forward-outline" style={{ fontSize: 20 }} color={colors.colorDisplay} />
+                <Text>{content}</Text>
             </TouchableOpacity>
         )
 
