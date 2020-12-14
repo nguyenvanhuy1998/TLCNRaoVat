@@ -51,6 +51,7 @@ export default class LoginScreen extends Component {
             if(response.data.kq == 1){
                 await AsyncStorage.setItem('Token', response.data.Token)
                 navigation.navigate("Home")
+                // navigation.navigate("Home")
             }else {
                 this.setState({
                     error: response.data.errMsg
