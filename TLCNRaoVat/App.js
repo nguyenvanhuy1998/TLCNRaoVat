@@ -21,14 +21,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import StackNavigator from './src/navigators/StackNavigator';
 import Loader from './src/components/Loader';
 
+
 const Stack = createStackNavigator()
 const App = () => {
   return (
-    <NavigationContainer>
-        <StatusBar barStyle = 'light-content' />
-          <Loader/> 
-        <StackNavigator/>
-    </NavigationContainer>
+      <NavigationContainer>
+        <StatusBar barStyle='light-content' />
+        <Loader />
+        <StackNavigator />
+      </NavigationContainer>
+
 
   );
 };

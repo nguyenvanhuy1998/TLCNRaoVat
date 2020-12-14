@@ -11,18 +11,20 @@ import Button from '../../components/Button'
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
+import Loader from '../../components/Loader'
 
 export default class ProfileScreen extends Component {
     constructor(props) {
         super(props)
-        this._loadData()
         this.state = {
             name: "",
             user:null
         }
     }
-    _loadData =  async() => {
-        try {
+   
+   componentDidMount =  async () => {
+    try {
+            Loader.show()
             await AsyncStorage.getItem('Token')
                 .then(resultToken => {
                     // VerifyToken
@@ -41,6 +43,7 @@ export default class ProfileScreen extends Component {
                     }
                     axios(config)
                     .then((res) => {
+                        Loader.hide()
                         if(res.data.kq == 1){
                          
                             this.setState({
@@ -57,7 +60,7 @@ export default class ProfileScreen extends Component {
         } catch (error) {
             console.log("error", error)
         }
-    }
+   }
   
     
     _logout =  async () => {
@@ -98,9 +101,6 @@ export default class ProfileScreen extends Component {
     }
     render() {
         const { name, user } = this.state
-        console.log('====================================');
-        console.log("user", user);
-        console.log('====================================');
         const { navigation } = this.props
         return (
             <View style={styles.container}>

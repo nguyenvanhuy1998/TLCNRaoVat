@@ -6,6 +6,7 @@ import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
 import AsyncStorage from "@react-native-community/async-storage";
 import Loader from '../../components/Loader'
+import {connect} from 'react-redux'
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -46,10 +47,10 @@ export default class LoginScreen extends Component {
         Loader.show()
         axios(config)
         .then(async (response)  =>  {
-            Loader.hide()
+            Loader.hide()          
             if(response.data.kq == 1){
                 await AsyncStorage.setItem('Token', response.data.Token)
-                navigation.pop()
+                navigation.navigate("Home")
             }else {
                 this.setState({
                     error: response.data.errMsg
@@ -110,5 +111,6 @@ export default class LoginScreen extends Component {
         )
     }
 }
+
 
 
