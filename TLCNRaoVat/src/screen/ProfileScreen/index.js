@@ -33,10 +33,9 @@ export default class ProfileScreen extends Component {
     componentDidFocus = () => {
         this._getToken()
     }
-
+   
     _getToken = async () => {
         try {
-            Loader.show()
             await AsyncStorage.getItem('Token')
                 .then(resultToken => {
                     // VerifyToken
@@ -55,7 +54,6 @@ export default class ProfileScreen extends Component {
                     }
                     axios(config)
                         .then((res) => {
-                            Loader.hide()
                             if (res.data.kq == 1) {
 
                                 this.setState({
@@ -78,7 +76,6 @@ export default class ProfileScreen extends Component {
     _logout = async () => {
         const { navigation } = this.props
         try {
-            Loader.show()
             await AsyncStorage.getItem('Token')
                 .then(resultToken => {
                     // VerifyToken
@@ -97,7 +94,6 @@ export default class ProfileScreen extends Component {
                     }
                     axios(config)
                         .then(async (res) => {
-                            Loader.hide()
                             if (res.data.kq == 1) {
                                 await AsyncStorage.removeItem("Token")
                                 helper.alert("Thông báo", res.data.errMsg, () => navigation.replace("Login"))

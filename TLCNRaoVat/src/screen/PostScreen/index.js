@@ -13,14 +13,26 @@ import { BASE_URL } from '../../network/config'
 export default class PostScreen extends Component {
     constructor(props) {
         super(props)
+        this._getToken()
         this.state = {
             refreshing: false,
             user: null
         }
     }
-    componentDidMount = async () => {
+    componentDidMount = () => {
+        this._unsubscribe = this.props.navigation.addListener('focus', this.componentDidFocus)
+
+    }
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
+    componentDidFocus = () => {
+        this._getToken()
+    }
+   
+
+    _getToken = async () => {
         try {
-            Loader.show()
             await AsyncStorage.getItem('Token')
                 .then(resultToken => {
                     // VerifyToken
@@ -39,7 +51,6 @@ export default class PostScreen extends Component {
                     }
                     axios(config)
                         .then((res) => {
-                            Loader.hide()
                             if (res.data.kq == 1) {
 
                                 this.setState({
@@ -88,9 +99,6 @@ export default class PostScreen extends Component {
     }
     render() {
         const { refreshing, user } = this.state
-        console.log('====================================');
-        console.log("user", user);
-        console.log('====================================');
         const { navigation } = this.props
 
         return (
