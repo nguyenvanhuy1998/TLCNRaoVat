@@ -5,7 +5,7 @@ import colors from '../../styles/colors'
 
 export default class TextInputUser extends Component {
     render() {
-        const {title, nameIcon, value, placeholder, onChangeText} = this.props
+        const {title, nameIcon, value, placeholder, onChangeText, security} = this.props
         return (
             <View style={{marginVertical:8, marginHorizontal:16}}>
                 <Text>{title}</Text>
@@ -16,6 +16,7 @@ export default class TextInputUser extends Component {
                         placeholderTextColor={colors.grayColor}
                         value={value}
                         onChangeText={onChangeText}
+                        secureTextEntry = {security}
                     />
                 </View>
 

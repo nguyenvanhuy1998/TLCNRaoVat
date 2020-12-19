@@ -134,9 +134,6 @@ export default class ProfileScreen extends Component {
     }
     render() {
         const { name, user, filePath } = this.state
-        console.log('====================================');
-        console.log("user", user);
-        console.log('====================================');
         const { navigation } = this.props
         return (
             <View style={styles.container}>
@@ -155,8 +152,8 @@ export default class ProfileScreen extends Component {
                                 </View>
                             </View>
                            <InforItem title = "Ngày tham gia" nameIcon = "calendar" content = {dateToString(user?.registerDate)}/>
-                           <InforItem title = "Đổi mật khẩu" nameIcon = "lock-closed" onPress = {() => navigation.navigate("123")}/>
-                           <InforItem title = "Cập nhật thông tin" nameIcon = "refresh-circle" onPress = {() => navigation.navigate("UpdateUser")}/>
+                           <InforItem title = "Đổi mật khẩu" nameIcon = "lock-closed" onPress = {() => navigation.navigate("ChangePassword")}/>
+                           <InforItem title = "Cập nhật thông tin" nameIcon = "refresh-circle" onPress = {() => navigation.navigate("UpdateUser", {data: user})}/>
                            <Button title={'ĐĂNG XUẤT'} onPress={this._logout} />
                         </ScrollView>
                         :

@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     btnPost: {
         textAlign: 'center',
         color: 'white',
+        fontWeight:'bold'
     },
 
 })

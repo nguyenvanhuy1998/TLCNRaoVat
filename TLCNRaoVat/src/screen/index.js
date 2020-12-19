@@ -15,6 +15,8 @@ import PostStepThird from './PostStepThird'
 import PostStepFour from './PostStepFour'
 import SplashScreen from './SplashScreen'
 import UpdateUser from './UpdateUser'
+import ChangePassword from './ChangePassword'
+import DataCityScreen from './DataCityScreen'
 export {
     LoginScreen,
     RegisterScreen,
@@ -32,6 +34,8 @@ export {
     PostStepThird,
     PostStepFour,
     SplashScreen,
-    UpdateUser
+    UpdateUser,
+    ChangePassword,
+    DataCityScreen
 }
 

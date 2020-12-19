@@ -1,29 +1,41 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TextInput, ScrollView, Image } from 'react-native'
+import { Text, StyleSheet, View, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import { iconDownFilter } from '../../images'
 import ViewTextInputPost from '../../components/ViewTextInputPost'
 import ButtonStep from '../../components/ButtonStep'
+
 export default class PostStepThird extends Component {
     constructor(props) {
         super(props)
+        const data = props.route.params.data
         this.state = {
             title: "",
             description: "",
             price: "",
             address: "",
-            phone:"",
+            phone: "",
+            city: "Hà Nội"
             // title:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
     }
+    selectCity = (data) => {
+        console.log('====================================');
+        console.log("data", data);
+        console.log('====================================');
+        this.setState({
+            city: data
+        })
+
+    }
     render() {
         const { navigation } = this.props
-        const { title, description, price, address, phone } = this.state
+        const { title, description, price, address, phone, city } = this.state
         return (
             <View style={styles.container}>
                 <Header onPress={() => navigation.pop()} title="Cập nhật thông tin" />
-                <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator = {false} alwaysBounceVertical = {false}>
+                <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator={false} alwaysBounceVertical={false}>
                     <ViewTextInputPost
                         marginTop={30}
                         title="Tiêu đề bài đăng:"
@@ -45,14 +57,18 @@ export default class PostStepThird extends Component {
                         value={price}
                         onChangeText={(text) => this.setState({ price: text })}
                     />
-                   
-                    <View style={styles.filterContainer}>
+
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate("DataCityScreen", {
+                            onSelect: this.selectCity
+                        })
+                    }} style={styles.filterContainer}>
                         <Text style={styles.city}>Tỉnh/Thành Phố</Text>
                         <View style={styles.selectCity}>
-                            <Text style={styles.textCity}>Hà Nội</Text>
+                            <Text style={styles.textCity}>{city}</Text>
                             <Image source={iconDownFilter} />
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <ViewTextInputPost
                         marginTop={30}
                         title="Địa chỉ:"
@@ -60,14 +76,16 @@ export default class PostStepThird extends Component {
                         value={address}
                         onChangeText={(text) => this.setState({ address: text })}
                     />
-                      <ViewTextInputPost
+                    <ViewTextInputPost
                         marginTop={30}
                         title="Số điện thoại:"
                         placeholder="Nhập số điện thoại"
                         value={phone}
                         onChangeText={(text) => this.setState({ phone: text })}
                     />
-                    <View style={styles.viewSelect}>
+
+
+                    {/* <View style={styles.viewSelect}>
                         <View style={styles.viewActive}>
                             <View style={styles.viewInActive} />
                         </View>
@@ -80,7 +98,7 @@ export default class PostStepThird extends Component {
                     <View style={{ ...styles.viewSelect, marginTop: 10, marginLeft: 28 }}>
                         <View style={styles.ViewNegotiated} />
                         <Text style={styles.negotiated}>Thương lượng giá</Text>
-                    </View>
+                    </View> */}
                 </ScrollView>
                 <ButtonStep onPress={() => navigation.navigate("PostStepFour")} name="Tiếp theo" />
             </View>
