@@ -40,10 +40,12 @@ export default class PostStepFirst extends Component {
     }
     _renderItem = ({ item, index }) => {
         const {navigation} = this.props
+        const {user} = this.props.route.params
         return (
             <TouchableOpacity onPress = {() => navigation.navigate("PostStepThird", {
                 idCategory: item._id,
-                nameCate: item.Name
+                nameCate: item.Name,
+                user: user 
             }) } style={styles.containerItem}>
                 <Text style={{ fontSize: 16 }}>{item.Name}</Text>
                 <IconRight name="chevron-forward-outline" style={{ fontSize: 20 }} color={colors.colorRegular} />

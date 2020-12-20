@@ -26,7 +26,6 @@ const options = {
 export default class PostStepFour extends Component {
     constructor(props) {
         super(props)
-        console.log(props.route.params);
         this.state = {
             filePath: '',
             imageName:'',
@@ -90,7 +89,8 @@ export default class PostStepFour extends Component {
         'Diachi': address,
         'Image': imageName,
         'Nhomsanpham': dataCategory.idCategory,
-        'Thanhpho': city._id 
+        'Thanhpho': city._id,
+        'UserId':  dataCategory.user
         });
         var config = {
           method: 'post',
