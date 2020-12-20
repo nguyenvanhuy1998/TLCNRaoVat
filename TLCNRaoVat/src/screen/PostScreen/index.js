@@ -121,12 +121,17 @@ export default class PostScreen extends Component {
     }
     _renderItem = ({ item, index }) => {
         const { nameCity } = this.state
+        const name = nameCity.find(x => x._id == item.Thanhpho).Name
+        const {navigation} = this.props
         return (
-            <View style={styles.containerItem}>
+            <TouchableOpacity onPress = {() => navigation.navigate("BatdongsanDetail", {
+                dataPost: item,
+                city: nameCity
+            })} style={styles.containerItem}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={{ width: 200 }}>
                         <Text numberOfLines={0} style={styles.postTitle}>{item.TieuDe}</Text>
-                        <Text style={styles.city}>{nameCity?.find(x => x._id == item.Thanhpho).Name || item.Thanhpho}</Text>
+                        <Text style={styles.city}>{name}</Text>
                         <Text style={styles.date}>{dateToString(item.NgayDang)}</Text>
                     </View>
                     <View style={styles.viewImage}>
@@ -141,7 +146,7 @@ export default class PostScreen extends Component {
                     </View>
 
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     onRefresh = () => {

@@ -5,18 +5,22 @@ import Header from '../../components/Header'
 import { iconDownFilter } from '../../images'
 import ViewTextInputPost from '../../components/ViewTextInputPost'
 import ButtonStep from '../../components/ButtonStep'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { BASE_URL } from '../../network/config'
+import helper from '../../helper'
 
 export default class PostStepThird extends Component {
     constructor(props) {
         super(props)
-     
+
         this.state = {
             title: "",
             description: "",
             price: "",
             address: "",
             phone: "",
-            city: ""
+            city: "",
+            showFinishEdit: false
             // title:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
     }
@@ -26,14 +30,64 @@ export default class PostStepThird extends Component {
         })
 
     }
+    componentDidMount() {
+        const { dataPost } = this.props.route?.params
+        if (dataPost) {
+            const name = dataPost.city.find(x => x._id == dataPost.dataPost.Thanhpho)
+            this.setState({
+                title: dataPost?.dataPost?.TieuDe,
+                description: dataPost?.dataPost?.Mota,
+                price: dataPost?.dataPost?.Gia,
+                address: dataPost?.dataPost?.Diachi,
+                phone: dataPost?.dataPost?.Sodienthoai,
+                city: name,
+                showFinishEdit: true
+            })
+        }
+    }
+   
+    editFinish = () => {
+        const { dataPost } = this.props.route?.params
+        const {title, description, price, address, phone, city } = this.state
+        var axios = require('axios');
+        var qs = require('qs');
+        var data = qs.stringify({
+            'PostId': dataPost.dataPost._id,
+            'TieuDe':title ,
+            'Mota': description,
+            'Sodienthoai': phone,
+            'Diachi': address,
+            'Thanhpho': city._id,
+            'Gia':price
+        });
+        var config = {
+            method: 'post',
+            url: BASE_URL + '/post/update',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+
+        axios(config)
+            .then((response) =>  {
+                helper.alert("Thông báo", "Cập nhật bài viết thành công", () => this.props.navigation.navigate("Post"))
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
     render() {
         const { navigation } = this.props
-        const dataCategory = this.props.route.params
-        const { title, description, price, address, phone, city } = this.state
+        const dataCategory = this.props.route?.params
+        const { title, description, price, address, phone, city, showFinishEdit } = this.state
+
         return (
             <View style={styles.container}>
                 <Header onPress={() => navigation.pop()} title="Cập nhật thông tin" />
                 <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator={false} alwaysBounceVertical={false}>
+
                     <ViewTextInputPost
                         marginTop={30}
                         title="Tiêu đề bài đăng:"
@@ -98,15 +152,23 @@ export default class PostStepThird extends Component {
                         <Text style={styles.negotiated}>Thương lượng giá</Text>
                     </View> */}
                 </ScrollView>
-                <ButtonStep onPress={() => navigation.navigate("PostStepFour", {
-                    dataCategory:dataCategory,
-                    title:title,
-                    description: description,
-                    price: price,
-                    address: address,
-                    phone: phone,
-                    city: city
-                })} name="Tiếp theo" />
+                {
+                    !showFinishEdit
+                        ?
+                        <ButtonStep onPress={() => navigation.navigate("PostStepFour", {
+                            dataCategory: dataCategory,
+                            title: title,
+                            description: description,
+                            price: price,
+                            address: address,
+                            phone: phone,
+                            city: city
+                        })} name="Tiếp theo" />
+                        :
+                        <ButtonStep onPress={this.editFinish} name="Hoàn thành" />
+                }
+
+
             </View>
         )
     }

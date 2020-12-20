@@ -57,7 +57,7 @@ export default class HomeScreen extends Component {
         const { navigation } = this.props
         return (
             <TouchableOpacity style={styles.item} onPress={() => {
-                navigation.navigate("Batdongsan")
+                navigation.navigate("Batdongsan", {IdCategory: item._id})
             }}>
                 <Image source={{
                     uri: BASE_URL + '/upload/' + item.Image
