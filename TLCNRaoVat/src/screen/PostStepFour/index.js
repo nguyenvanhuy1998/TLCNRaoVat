@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, Image, TouchableOpacity, ActivityIndicator, Platform } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import { iconCamera } from '../../images'
@@ -7,6 +7,9 @@ import InsertImage from '../../components/InsertImage'
 import ButtonStep from '../../components/ButtonStep'
 import ImagePicker from 'react-native-image-picker';
 import { IS_IOS } from '../../Constants'
+import { BASE_URL } from '../../network/config'
+import helper from '../../helper'
+// import fs from 'fs'
 const options = {
     title: "Chọn hình ảnh",
     cancelButtonTitle: "Hủy",
@@ -17,28 +20,105 @@ const options = {
         skipBackup: true,
         path: 'images',
     },
+    quality: 0.7
+
 };
 export default class PostStepFour extends Component {
     constructor(props) {
         super(props)
+        console.log(props.route.params);
         this.state = {
-            filePath: ''
+            filePath: '',
+            imageName:'',
+            isLoading: false
         }
     }
     _selectImageGallery = () => {
         ImagePicker.showImagePicker(options, (response) => {
             if (!response.didCancel && !response.error) {
-                this.setState({
-                    filePath: response
+                var data = new FormData();
+                data.append('hinhdaidien', {
+                    uri: Platform.OS === "android" ? response.uri : response.uri.replace("file://", ""),
+                    name: `post.png`,
+                    type: response.type || 'image/jpeg'
                 })
+
+                var axios = require('axios');
+                var config = {
+                    method: 'post',
+                    url: BASE_URL + '/uploadFile',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    data: data
+                };
+                this.setState({ isLoading: true })
+                axios(config)
+                    .then((response) => {
+                        if (response.data.kq == 1) {
+                            this.setState({
+                                isLoading: false,
+                                filePath: BASE_URL + "/upload/" + response.data.urlFile.filename,
+                                imageName: response.data.urlFile.filename
+                            })
+                        }else {
+                            console.log('====================================');
+                            console.log("error");
+                            console.log('====================================');
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
 
             }
         })
     }
+
+    _submitPost = async () => {
+        const {navigation} = this.props
+        const { title, description, price, address, phone, dataCategory, city } = this.props?.route?.params
+        const { imageName } = this.state
+        var axios = require('axios');
+        var qs = require('qs');
+        var data = qs.stringify({
+         'TieuDe': title,
+        'Gia': price,
+        'Mota': description,
+        'Sodienthoai': phone,
+        'Diachi': address,
+        'Image': imageName,
+        'Nhomsanpham': dataCategory.idCategory,
+        'Thanhpho': city._id 
+        });
+        var config = {
+          method: 'post',
+          url: BASE_URL + '/post/add',
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+            if(response.data.kq == 1){
+                helper.alert("Thông báo", response.data.errMsg, () => navigation.navigate("Home"))
+            }else {
+
+            }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        
+
+
+    }
     render() {
         const { navigation } = this.props
-        const { filePath } = this.state
-
+        const { filePath, isLoading } = this.state
         return (
             <View style={styles.container}>
                 <Header onPress={() => navigation.pop()} title="Chọn ảnh" />
@@ -56,9 +136,13 @@ export default class PostStepFour extends Component {
                                     <Text style={styles.insertImage}>Thêm hình</Text>
                                 </View>
                                 :
-                                <Image resizeMode='cover' style={{ width: '100%', height: '100%' }} source={{ uri: filePath.uri }} />
+                                <Image resizeMode='cover' style={{ width: '100%', height: '100%' }} source={{ uri: filePath }} />
+                        }
+                        {
+                            isLoading && <ActivityIndicator />
                         }
                     </TouchableOpacity>
+
                     <View style={{
                         backgroundColor: '#D7EEF7',
                         padding: 16,
@@ -75,7 +159,7 @@ export default class PostStepFour extends Component {
                     </View>
 
                 </View>
-                <ButtonStep onPress={() => alert("123")} name="Đăng bài" />
+                <ButtonStep onPress={this._submitPost} name="Đăng bài" />
 
             </View>
         )

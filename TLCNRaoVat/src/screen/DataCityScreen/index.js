@@ -46,7 +46,7 @@ export default class DataCityScreen extends Component {
                 margin:16,
                 
             }} onPress = { async () => {
-               await this.props.route.params.onSelect(item.Name)
+               await this.props.route.params.onSelect(item)
                 navigation.goBack()
             }}>
                     <Text>{item.Name}</Text>

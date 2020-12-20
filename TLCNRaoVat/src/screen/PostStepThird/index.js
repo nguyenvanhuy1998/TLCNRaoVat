@@ -9,21 +9,18 @@ import ButtonStep from '../../components/ButtonStep'
 export default class PostStepThird extends Component {
     constructor(props) {
         super(props)
-        const data = props.route.params.data
+     
         this.state = {
             title: "",
             description: "",
             price: "",
             address: "",
             phone: "",
-            city: "Hà Nội"
+            city: ""
             // title:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
     }
     selectCity = (data) => {
-        console.log('====================================');
-        console.log("data", data);
-        console.log('====================================');
         this.setState({
             city: data
         })
@@ -31,6 +28,7 @@ export default class PostStepThird extends Component {
     }
     render() {
         const { navigation } = this.props
+        const dataCategory = this.props.route.params
         const { title, description, price, address, phone, city } = this.state
         return (
             <View style={styles.container}>
@@ -65,7 +63,7 @@ export default class PostStepThird extends Component {
                     }} style={styles.filterContainer}>
                         <Text style={styles.city}>Tỉnh/Thành Phố</Text>
                         <View style={styles.selectCity}>
-                            <Text style={styles.textCity}>{city}</Text>
+                            <Text style={styles.textCity}>{city.Name}</Text>
                             <Image source={iconDownFilter} />
                         </View>
                     </TouchableOpacity>
@@ -100,7 +98,15 @@ export default class PostStepThird extends Component {
                         <Text style={styles.negotiated}>Thương lượng giá</Text>
                     </View> */}
                 </ScrollView>
-                <ButtonStep onPress={() => navigation.navigate("PostStepFour")} name="Tiếp theo" />
+                <ButtonStep onPress={() => navigation.navigate("PostStepFour", {
+                    dataCategory:dataCategory,
+                    title:title,
+                    description: description,
+                    price: price,
+                    address: address,
+                    phone: phone,
+                    city: city
+                })} name="Tiếp theo" />
             </View>
         )
     }
