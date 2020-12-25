@@ -32,7 +32,7 @@ export default class ProfileScreen extends Component {
         this.state = {
             name: "",
             user: null,
-            filePath: ''
+            filePath: '',
         }
     }
 
@@ -67,10 +67,11 @@ export default class ProfileScreen extends Component {
                     }
                     axios(config)
                         .then((res) => {
-                            if (res.data.kq == 1) {
+                            if (res.data.kq == 1) { 
 
                                 this.setState({
-                                    user: res.data.User
+                                    user: res.data.User, 
+                                    filePath:res.data.User.image
                                 })
                             } else {
                                 console.log(res.data.errMsg)
@@ -123,11 +124,63 @@ export default class ProfileScreen extends Component {
         }
     }
     _changeAvatar = () => {
+        const {user} = this.state
         ImagePicker.showImagePicker(options, (response) => {
             if (!response.didCancel && !response.error) {
-                this.setState({
-                    filePath: response
+                var data = new FormData();
+                data.append('hinhdaidien', {
+                    uri: Platform.OS === "android" ? response.uri : response.uri.replace("file://", ""),
+                    name: `post.png`,
+                    type: response.type || 'image/jpeg'
                 })
+
+                var axios = require('axios');
+                var config = {
+                    method: 'post',
+                    url: BASE_URL + '/uploadFile',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    data: data
+                };
+                
+                axios(config)
+                    .then((response) => {
+                      
+                        if (response.data.kq == 1) {
+                            this.setState({
+                                filePath: response.data.urlFile.filename,
+                            })
+                            var qs = require('qs')
+                            var dataImage = qs.stringify({
+                               'image': response.data.urlFile.filename,
+                               'UserId':  user.IdUser
+                               });
+                            var configImage = {
+                                method:'post',
+                                url: BASE_URL + '/account/uploadImage',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                data: dataImage
+                            }
+                            axios(configImage)
+                            .then((response) => {
+                                if(response.data.kq == 1){
+                                   
+                                }
+                            })
+                           
+                        }else {
+                            console.log('====================================');
+                            console.log("error");
+                            console.log('====================================');
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
 
             }
         })
@@ -144,7 +197,7 @@ export default class ProfileScreen extends Component {
                         <ScrollView style={{ backgroundColor: '#ECEEEF' }} alwaysBounceVertical={false}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 16 }}>
                                 <TouchableOpacity onPress={this._changeAvatar}>
-                                    <Image style={{ width: 65, height: 65, borderRadius: 32.5 }} resizeMode='contain' source={filePath == '' ? iconAvatar : { uri: filePath.uri }} />
+                                    <Image style={{ width: 65, height: 65, borderRadius: 32.5 }} resizeMode='contain' source={filePath == '' ? iconAvatar : { uri: BASE_URL + '/upload/' + filePath }} />
                                 </TouchableOpacity>
                                 <View style={{ marginLeft: 8 }}>
                                     <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 4 }}>Số điện thoại</Text>

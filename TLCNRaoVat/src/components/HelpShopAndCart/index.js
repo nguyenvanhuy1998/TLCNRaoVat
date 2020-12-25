@@ -8,7 +8,7 @@ export default class HelpShopAndCart extends Component {
             <View style={styles.containerItem}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', width:300 }}>
                     <Image source={iconHelpContent} />
-                    <Text style={{ marginLeft: 8 }} numberOfLines={2}>{item.content}</Text>
+                    <Text style={{ marginLeft: 8 }} numberOfLines={2}>{item.Title}</Text>
                 </View>
                 <Image source={iconDownHelp} />
 

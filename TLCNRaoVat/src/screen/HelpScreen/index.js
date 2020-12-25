@@ -12,7 +12,8 @@ export default class HelpScreen extends Component {
         super(props)
         this._getToken()
         this.state = {
-            user: null
+            user: null,
+            data: {}
         }
     }
     componentDidMount = () => {
@@ -52,6 +53,36 @@ export default class HelpScreen extends Component {
                                 this.setState({
                                     user: res.data.User
                                 })
+                                let dataHelp = qs.stringify({
+                                   
+                                })
+                                var config = {
+                                    method: 'post',
+                                    url: BASE_URL + '/help',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    },
+                                    data: dataHelp
+                                }
+                                axios(config)
+                                .then((response) => {
+                                   
+                                    if(response.data.kq == 1){
+                                        this.setState({
+                                            data: response.data.list
+                                        })
+                                    }else {
+                                        console.log('====================================');
+                                        console.log("Error");
+                                        console.log('====================================');
+                                    }
+                                })
+                                .catch((err)=> {
+                                    console.log('====================================');
+                                    console.log(err);
+                                    console.log('====================================');
+                                }) 
+
                             } else {
                                 console.log(res.data.errMsg)
                             }
@@ -66,7 +97,8 @@ export default class HelpScreen extends Component {
     }
     render() {
         const { navigation } = this.props
-        const { user } = this.state
+        const { user, data} = this.state
+       
         return (
             <View style={styles.container}>
                 <Header noBack title={'Hỗ trợ'} />
@@ -74,8 +106,12 @@ export default class HelpScreen extends Component {
                     user != null
                         ?
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 16 }}>
-                            <HelpTitle onPress={() => navigation.navigate('HelpShop')} image={iconShop} title={"Tôi là người bán"} content={"Những mẹo vặt, các hướng dẫn giúp bán hàng nhanh chóng và tiện lợi trên  Rao Vặt"} />
-                            <HelpTitle onPress={() => navigation.navigate('HelpCart')} image={iconCart} title={"Tôi là người mua"} content={"Những mẹo vặt, các hướng dẫn giúp mua hàng nhanh chóng và tiện lợi trên Rao Vặt "} />
+                            <HelpTitle onPress={() => navigation.navigate('HelpShop', {
+                                dataShop: data.filter(x => x.Type == "Người bán")
+                            })} image={iconShop} title={"Tôi là người bán"} content={"Những mẹo vặt, các hướng dẫn giúp bán hàng nhanh chóng và tiện lợi trên  Rao Vặt"} />
+                            <HelpTitle onPress={() => navigation.navigate('HelpCart', {
+                                dataCart: data.filter(x => x.Type == "Người mua")
+                            })} image={iconCart} title={"Tôi là người mua"} content={"Những mẹo vặt, các hướng dẫn giúp mua hàng nhanh chóng và tiện lợi trên Rao Vặt "} />
                         </View> :
                         <NotLogin onPress={() => navigation.navigate("Login")} />
                 }

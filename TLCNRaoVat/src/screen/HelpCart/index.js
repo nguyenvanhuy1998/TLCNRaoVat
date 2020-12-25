@@ -9,7 +9,7 @@ export default class HelpCart extends Component {
         return (
             <View style={styles.container}>
                 <Header title={"Hỗ trợ người mua"} onPress={() => this.props.navigation.pop()} />
-                <HelpShopAndCart data = {dataHelpCart}/>
+                <HelpShopAndCart data = {this.props.route.params.dataCart}/>
             </View>
         )
     }
