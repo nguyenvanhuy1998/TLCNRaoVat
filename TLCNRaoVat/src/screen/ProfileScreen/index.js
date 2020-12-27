@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TextInput, Image, ScrollView } from 'react-native'
+import { Text, StyleSheet, View, TextInput, Image, ScrollView, RefreshControl } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import NotLogin from '../../components/NotLogin'
@@ -33,6 +33,7 @@ export default class ProfileScreen extends Component {
             name: "",
             user: null,
             filePath: '',
+            refreshing: false
         }
     }
 
@@ -67,8 +68,10 @@ export default class ProfileScreen extends Component {
                     }
                     axios(config)
                         .then((res) => {
+                            console.log('====================================');
+                            console.log("res", res);
+                            console.log('====================================');
                             if (res.data.kq == 1) { 
-
                                 this.setState({
                                     user: res.data.User, 
                                     filePath:res.data.User.image
@@ -185,6 +188,14 @@ export default class ProfileScreen extends Component {
             }
         })
     }
+    _onRefresh = () =>{
+        this.setState({refreshing:true})
+        this._getToken().then(() => {
+            this.setState({
+                refreshing:false
+            })
+        })
+    }
     render() {
         const { name, user, filePath } = this.state
         const { navigation } = this.props
@@ -194,7 +205,12 @@ export default class ProfileScreen extends Component {
                 {
                     user != null
                         ?
-                        <ScrollView style={{ backgroundColor: '#ECEEEF' }} alwaysBounceVertical={false}>
+                        <ScrollView refreshControl = {
+                            <RefreshControl
+                                refreshing = {this.state.refreshing}
+                                onRefresh = {this._onRefresh}
+                            />
+                        } style={{ backgroundColor: '#ECEEEF' }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 16 }}>
                                 <TouchableOpacity onPress={this._changeAvatar}>
                                     <Image style={{ width: 65, height: 65, borderRadius: 32.5 }} resizeMode='contain' source={filePath == '' ? iconAvatar : { uri: BASE_URL + '/upload/' + filePath }} />

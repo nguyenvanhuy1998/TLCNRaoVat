@@ -48,7 +48,7 @@ export default class UpdateUser extends Component {
 
     updateUser = () => {
         const { email, fullName, address, sex, birthday, userId } = this.state
-        const {navigation} = this.props
+        const { navigation } = this.props
         var axios = require('axios');
         var qs = require('qs');
         var data = qs.stringify({
@@ -69,12 +69,15 @@ export default class UpdateUser extends Component {
         };
 
         axios(config)
-            .then(function (response) {
-              if(response.data.kq == 1){
-                  helper.alert("Thông báo", response.data.errMsg, () => navigation.goBack())
-              } else {
-                  console.log("error")
-              }
+            .then( (response) =>  {
+                console.log('====================================');
+                console.log("res",response);
+                console.log('====================================');
+                if (response.data.kq == 1) {
+                      helper.alert("Thông báo", response.data.errMsg, () => navigation.goBack())
+                } else {
+                    console.log("error")
+                }
             })
             .catch(function (error) {
                 console.log(error);
@@ -103,6 +106,7 @@ export default class UpdateUser extends Component {
     render() {
         const { navigation } = this.props
         const { email, fullName, address, sex, birthday, isDatePickerVisible } = this.state
+
 
         return (
             <View style={styles.container}>
