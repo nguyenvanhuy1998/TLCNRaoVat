@@ -61,7 +61,10 @@ export default class HomeScreen extends Component {
         const { navigation } = this.props
         return (
             <TouchableOpacity style={styles.item} onPress={() => {
-                navigation.navigate("Batdongsan", {IdCategory: item._id})
+                navigation.navigate("Batdongsan", {
+                    IdCategory: item._id,
+                    NameCategory: item.Name
+                })
             }}>
                 <Image source={{
                     uri: BASE_URL + '/upload/' + item.Image
@@ -88,10 +91,7 @@ export default class HomeScreen extends Component {
     }
 
     render() {
-        const {dataAPI, textSearch, temp} = this.state
-        console.log('====================================');
-        console.log("dataAPI", temp);
-        console.log('====================================');
+        const {dataAPI} = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.statusBarHeight} />

@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import { dataTitleBatdongsan, dataBatdongsan } from '../../Data'
-import { iconDownFilter } from '../../images'
+import { iconDownFilter, iconBack, iconDownHelp } from '../../images'
 import FilterCity from '../../components/FilterCity'
 import colors from '../../styles/colors'
 import { numberToString } from '../../util'
 import { BASE_URL } from '../../network/config'
+import metrics from '../../styles/metrics'
+import IconSearch from 'react-native-vector-icons/Ionicons'
 export default class Batdongsan extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataAPI: {},
-            nameCity:[],
+            dataAPI: [],
+            nameCity: [],
+            temp:[],
+            searchText:''
         }
     }
     componentDidMount() {
@@ -78,8 +82,8 @@ export default class Batdongsan extends Component {
     }
     _renderItemPrimary = ({ item, index }) => {
         const { navigation } = this.props
-        const {nameCity} = this.state
-        const thanhpho = nameCity.find(x =>  x._id == item.Thanhpho)
+        const { nameCity } = this.state
+        const thanhpho = nameCity.find(x => x._id == item.Thanhpho)
 
         return (
             <TouchableOpacity onPress={() => navigation.navigate("BatdongsanDetail", {
@@ -95,36 +99,44 @@ export default class Batdongsan extends Component {
     }
     render() {
         const { navigation } = this.props
+        const {NameCategory} = this.props?.route?.params
+       
         const { dataAPI } = this.state
         return (
             <View style={styles.container}>
-                <Header title={"Bất động sản"} onPress={() => navigation.pop()} />
-                <View style={styles.primaryFilter}>
-                    <FlatList
-                        style={{ padding: 10 }}
-                        data={dataTitleBatdongsan}
-                        renderItem={this._renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                    // alwaysBounceHorizontal={false}
-                    />
-                </View>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={{ backgroundColor: 'white', flexDirection: 'row' }}>
-                        <FilterCity optionWidth={107} title={"Tỉnh/Thành"} type="Tất cả" />
-                        <FilterCity optionWidth={107} title={"Số phòng"} type="Tất cả" />
+                <View style={styles.wrapper}>
+                    <View style={styles.containerSearch}>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Image source={iconBack} />
+                        </TouchableOpacity>
+                        <View style={styles.viewSearch}>
+                            <IconSearch name="search" size={16} color={colors.grayColor} />
+                            <TextInput
+                                placeholder={NameCategory}
+                                style={{
+                                    flex: 1,
+                                    marginLeft: 6,
+                                }}
+                                value={this.state.textSearch}
+                                // onChangeText={this.updateSearch}
+                            />
+                        </View>
                     </View>
-                    <FlatList
+                </View>
+                <View style = {styles.containerFilter}>
+                    <IconSearch name = "location-outline" size = {16}/>
+                    <Text style= {styles.khuvuc}>Khu vực:</Text>
+                    <Text style = {styles.nameCity}>Thành phố HCM</Text>
+                    <Image source = {iconDownHelp}/>
+                </View>
+                <FlatList
                         style={{ marginHorizontal: 16, paddingTop: 16 }}
                         data={dataAPI}
                         numColumns={2}
                         renderItem={this._renderItemPrimary}
                         keyExtractor={(item, index) => index.toString()}
                         showsVerticalScrollIndicator={false}
-                    />
-                </ScrollView>
-
+                />
             </View>
         )
     }

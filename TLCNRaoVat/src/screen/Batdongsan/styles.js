@@ -60,5 +60,40 @@ export default StyleSheet.create({
     city: {
         fontSize: 10,
         marginTop: 4
+    },
+    viewSearch: {
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        padding: 10,
+        marginHorizontal: 10,
+        borderRadius: 4
+    },
+    wrapper: {
+        backgroundColor: colors.headerColor,
+        paddingTop: metrics.safePadding,
+    },
+    containerSearch: {
+        // height: 44,
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingHorizontal: 20,
+        marginVertical:20,
+    },
+    containerFilter:{
+        backgroundColor:'white',
+        flexDirection:'row',
+        alignItems:'center',
+        padding:16,
+        borderBottomWidth:0.5,
+        borderColor:colors.colorRegular
+    },
+    khuvuc:{
+        fontSize:13,
+        color:colors.grayColor,
+        marginHorizontal:6
+    },
+    nameCity:{
+        fontSize:13,
+        marginRight:6
     }
 })
