@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ScrollView, FlatList, TouchableOpacity, Dimensions, ImageBackground, Image } from 'react-native'
+import { Text, StyleSheet, View, ScrollView, FlatList, TouchableOpacity, Dimensions, ImageBackground, Image, TextInput } from 'react-native'
 import styles from './styles'
 import helper from '../../helper'
 import metrics from '../../styles/metrics'
@@ -14,7 +14,9 @@ export default class HomeScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataAPI: null
+            dataAPI: [],
+            temp:[],
+            textSearch:''
         }
     }
     componentDidMount() {
@@ -33,7 +35,8 @@ export default class HomeScreen extends Component {
         axios(config)
             .then((response) => {
                 this.setState({
-                    dataAPI: response.data.CateList
+                    dataAPI: [...this.state.dataAPI, ...response.data.CateList],
+                    temp:[...this.state.temp, ...response.data.CateList]
                 })
             })
             .catch(function (error) {
@@ -54,6 +57,7 @@ export default class HomeScreen extends Component {
     //     return dataList
     // }
     _renderItem = ({ item, index }) => {
+        
         const { navigation } = this.props
         return (
             <TouchableOpacity style={styles.item} onPress={() => {
@@ -66,16 +70,44 @@ export default class HomeScreen extends Component {
             </TouchableOpacity>
         )
     }
+    updateSearch = searchTxt => {
+        this.setState({textSearch: searchTxt}, () => {
+            if(searchTxt == ''){
+                this.setState({
+                    dataAPI:[...this.state.temp]
+                })
+                return;
+            }
+            this.state.dataAPI = this.state.temp.filter(function(item){
+                return item.Name.includes(searchTxt)
+            }).map(function({_id, Name, Image}){
+                return {_id,Name, Image}
+            })
+           
+        })
+    }
 
     render() {
-        const {dataAPI} = this.state
+        const {dataAPI, textSearch, temp} = this.state
+        console.log('====================================');
+        console.log("dataAPI", temp);
+        console.log('====================================');
         return (
             <View style={styles.container}>
                 <View style={styles.statusBarHeight} />
                 <View style={styles.viewContainerSearch}>
                     <View style={styles.viewSearch}>
                         <IconSearch name="search" size={16} color={colors.grayColor} />
-                        <Text style={styles.textSearch}>Tìm kiếm</Text>
+                        <TextInput
+                            placeholder = {"Tìm kiếm"}
+                            style = {{
+                                flex:1,
+                                marginLeft:6,
+                            }}
+                            value = {this.state.textSearch}
+                            onChangeText = {this.updateSearch}
+
+                        />
                     </View>
                     <ScrollView showsVerticalScrollIndicator={false} style={styles.viewPrimary}>
                         <Text style={styles.title}>Khám phá danh mục</Text>
