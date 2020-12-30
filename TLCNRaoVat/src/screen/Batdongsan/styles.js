@@ -76,8 +76,9 @@ export default StyleSheet.create({
         // height: 44,
         alignItems: 'center',
         flexDirection: 'row',
-        paddingHorizontal: 20,
-        marginVertical:20,
+        paddingHorizontal: 16,
+        // marginVertical:20,
+        marginVertical:10,
     },
     containerFilter:{
         backgroundColor:'white',

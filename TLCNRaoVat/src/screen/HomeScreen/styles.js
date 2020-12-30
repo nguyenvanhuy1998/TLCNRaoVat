@@ -57,7 +57,7 @@ export default StyleSheet.create({
         shadowRadius:4
     },
     viewPrimary:{
-        flex:1, backgroundColor:'#ffffff', paddingHorizontal:12
+       flex:1, backgroundColor:'#ffffff', paddingHorizontal:12,
     },
     title:{
         fontSize:24, fontWeight:'600', marginTop:16, marginLeft:4

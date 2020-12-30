@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ScrollView, FlatList, TouchableOpacity, Dimensions, ImageBackground, Image, TextInput } from 'react-native'
+import { Text, StyleSheet, View, ScrollView, FlatList, TouchableOpacity, RefreshControl, Dimensions, ImageBackground, Image, TextInput, ActivityIndicator } from 'react-native'
 import styles from './styles'
 import helper from '../../helper'
 import metrics from '../../styles/metrics'
@@ -15,11 +15,16 @@ export default class HomeScreen extends Component {
         super(props)
         this.state = {
             dataAPI: [],
-            temp:[],
-            textSearch:''
+            temp: [],
+            textSearch: '',
+            isLoading: false,
+            refreshing: false
         }
     }
     componentDidMount() {
+        this.getDataCategory()
+    }
+    getDataCategory = () => {
         var axios = require('axios');
         var qs = require('qs');
         var data = qs.stringify({
@@ -31,18 +36,21 @@ export default class HomeScreen extends Component {
             headers: {},
             data: data
         };
-        
+        this.setState({
+            isLoading: true
+        })
         axios(config)
             .then((response) => {
+
                 this.setState({
+                    isLoading: false,
                     dataAPI: [...this.state.dataAPI, ...response.data.CateList],
-                    temp:[...this.state.temp, ...response.data.CateList]
+                    temp: [...this.state.temp, ...response.data.CateList]
                 })
             })
             .catch(function (error) {
                 console.log(error);
             });
-
     }
     // formatData = (dataList, numColumns) => {
     //     console.log('====================================');
@@ -57,7 +65,7 @@ export default class HomeScreen extends Component {
     //     return dataList
     // }
     _renderItem = ({ item, index }) => {
-        
+
         const { navigation } = this.props
         return (
             <TouchableOpacity style={styles.item} onPress={() => {
@@ -74,24 +82,26 @@ export default class HomeScreen extends Component {
         )
     }
     updateSearch = searchTxt => {
-        this.setState({textSearch: searchTxt}, () => {
-            if(searchTxt == ''){
+        this.setState({ textSearch: searchTxt }, () => {
+            if (searchTxt == '') {
                 this.setState({
-                    dataAPI:[...this.state.temp]
+                    dataAPI: [...this.state.temp]
                 })
                 return;
             }
-            this.state.dataAPI = this.state.temp.filter(function(item){
+            this.state.dataAPI = this.state.temp.filter(function (item) {
                 return item.Name.includes(searchTxt)
-            }).map(function({_id, Name, Image}){
-                return {_id,Name, Image}
+            }).map(function ({ _id, Name, Image }) {
+                return { _id, Name, Image }
             })
-           
+
         })
     }
-
+    onRefresh = () => {
+        this.getDataCategory()
+    }
     render() {
-        const {dataAPI} = this.state
+        const { dataAPI, refreshing } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.statusBarHeight} />
@@ -99,27 +109,38 @@ export default class HomeScreen extends Component {
                     <View style={styles.viewSearch}>
                         <IconSearch name="search" size={16} color={colors.grayColor} />
                         <TextInput
-                            placeholder = {"Tìm kiếm"}
-                            style = {{
-                                flex:1,
-                                marginLeft:6,
+                            placeholder={"Tìm kiếm"}
+                            style={{
+                                flex: 1,
+                                marginLeft: 6,
                             }}
-                            value = {this.state.textSearch}
-                            onChangeText = {this.updateSearch}
+                            value={this.state.textSearch}
+                            onChangeText={this.updateSearch}
 
                         />
                     </View>
-                    <ScrollView showsVerticalScrollIndicator={false} style={styles.viewPrimary}>
-                        <Text style={styles.title}>Khám phá danh mục</Text>
-                        <FlatList
-                            style={styles.viewFlatList}
-                            data={dataAPI}
-                            renderItem={this._renderItem}
-                            numColumns={numColumns}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
-                    </ScrollView>
+                    {this.state.isLoading == true ?
+                        <View style={{ flex: 1, backgroundColor: '#ffffff', justifyContent: 'center', alignItems: 'center' }}>
+                            <ActivityIndicator />
+                        </View> :
+                        <ScrollView refreshControl={
+                            <RefreshControl onRefresh={this.onRefresh} refreshing={refreshing} />
+                        } showsVerticalScrollIndicator={false} style={styles.viewPrimary}>
+
+                            <Text style={styles.title}>Khám phá danh mục</Text>
+                            <FlatList
+                                style={styles.viewFlatList}
+                                data={dataAPI}
+                                renderItem={this._renderItem}
+                                numColumns={numColumns}
+                                showsVerticalScrollIndicator={false}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                        </ScrollView>
+
+
+                    }
+
                 </View>
             </View>
         )
