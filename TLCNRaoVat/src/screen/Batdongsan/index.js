@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native'
+import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, ScrollView, TextInput, ActivityIndicator } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import { dataTitleBatdongsan, dataBatdongsan } from '../../Data'
@@ -16,10 +16,15 @@ export default class Batdongsan extends Component {
         this.state = {
             dataAPI: [],
             nameCity: [],
-            temp:[],
-            searchText:''
+            temp: [],
+            searchText: '',
+            city:'Tất cả',
+            isLoading: false
+
         }
     }
+
+    
     componentDidMount() {
         let axios = require('axios')
         let qs = require('qs')
@@ -32,13 +37,18 @@ export default class Batdongsan extends Component {
             headers: {},
             data: dataPost
         }
+        this.setState({
+            isLoading:true
+        })
         axios(configPost)
-            .then((resPost) => {
+            .then(async (resPost) => {
+
                 if (resPost.data.kq == 1) {
-                    let dataPostList = resPost.data.PostList
                     const { IdCategory } = this.props.route?.params
+                    let dataPostList = await resPost.data.PostList.filter(x => x.Nhomsanpham == IdCategory)
                     this.setState({
-                        dataAPI: dataPostList.filter(x => x.Nhomsanpham == IdCategory)
+                        dataAPI: [...this.state.dataAPI, ...dataPostList],
+                        temp: [...this.state.temp, ...dataPostList]
                     })
                     var dataCity = qs.stringify({
 
@@ -53,6 +63,7 @@ export default class Batdongsan extends Component {
                     axios(config)
                         .then((response) => {
                             this.setState({
+                                isLoading:false,
                                 nameCity: response.data.list
                             })
                         })
@@ -97,11 +108,42 @@ export default class Batdongsan extends Component {
             </TouchableOpacity>
         )
     }
+    updateSearch = searchTxt => {
+        this.setState({ textSearch: searchTxt }, () => {
+            if (searchTxt == '') {
+                this.setState({
+                    dataAPI: [...this.state.temp]
+                })
+                return;
+            }
+            this.state.dataAPI = this.state.temp.filter(function (item) {
+                return item.TieuDe.includes(searchTxt)
+            }).map(function ({ _id, TieuDe, Gia, Image, Thanhpho }) {
+                return { _id, TieuDe, Gia, Image, Thanhpho }
+            })
+
+        })
+    }
+    selectCity = (data) => {
+        const {dataAPI, temp}= this.state
+       
+        const dataFilter = temp.filter(x => x.Thanhpho == data._id)
+        this.setState({
+            city: data.Name,
+            dataAPI: dataFilter
+        })
+       
+     
+        
+    }
     render() {
         const { navigation } = this.props
-        const {NameCategory} = this.props?.route?.params
-       
+        const { NameCategory } = this.props?.route?.params
+
         const { dataAPI } = this.state
+        console.log('====================================');
+        console.log("dataAPIRender", dataAPI);
+        console.log('====================================');
         return (
             <View style={styles.container}>
                 <View style={styles.wrapper}>
@@ -118,24 +160,29 @@ export default class Batdongsan extends Component {
                                     marginLeft: 6,
                                 }}
                                 value={this.state.textSearch}
-                                // onChangeText={this.updateSearch}
+                                onChangeText={this.updateSearch}
                             />
                         </View>
                     </View>
                 </View>
-                <View style = {styles.containerFilter}>
-                    <IconSearch name = "location-outline" size = {16}/>
-                    <Text style= {styles.khuvuc}>Khu vực:</Text>
-                    <Text style = {styles.nameCity}>Thành phố HCM</Text>
-                    <Image source = {iconDownHelp}/>
-                </View>
+                <TouchableOpacity style={styles.containerFilter} onPress={() => {
+                    navigation.navigate("DataCityScreen", {
+                        onSelect: this.selectCity
+                    })
+                }}>
+                    <IconSearch name="location-outline" size={16} />
+                    <Text style={styles.khuvuc}>Khu vực:</Text>
+                    <Text style={styles.nameCity}>{this.state.city}</Text>
+                    <Image source={iconDownHelp} />
+                </TouchableOpacity>
+                {this.state.isLoading && <ActivityIndicator/>}
                 <FlatList
-                        style={{ marginHorizontal: 16, paddingTop: 16 }}
-                        data={dataAPI}
-                        numColumns={2}
-                        renderItem={this._renderItemPrimary}
-                        keyExtractor={(item, index) => index.toString()}
-                        showsVerticalScrollIndicator={false}
+                    style={{ marginHorizontal: 16, paddingTop: 16 }}
+                    data={dataAPI}
+                    numColumns={2}
+                    renderItem={this._renderItemPrimary}
+                    keyExtractor={(item, index) => index.toString()}
+                    showsVerticalScrollIndicator={false}
                 />
             </View>
         )

@@ -10,6 +10,7 @@ import Carousel from 'react-native-snap-carousel';
 import metrics from '../../styles/metrics'
 import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
+import Communications from 'react-native-communications';
 export default class BatdongsanDetail extends Component {
     constructor(props) {
         super(props)
@@ -98,7 +99,9 @@ export default class BatdongsanDetail extends Component {
         const { navigation } = this.props
         const { imageUri, title, price, datePost, phone, address, description, showEdit } = this.state
         const data = this.props.route?.params
-       
+        console.log('====================================');
+        console.log("data", data.data.Image);
+        console.log('====================================');
         // const listCarousel = [
         //     data.image_first,
         //     data.image_second,
@@ -107,7 +110,7 @@ export default class BatdongsanDetail extends Component {
         return (
             <View style={styles.container}>
                 <Header onPress={() => navigation.pop()} noSearch title="Thông tin chi tiết" />
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator = {false}>
                     <View style={{ backgroundColor: 'white' }}>
                         <View style={styles.slide}>
                             <Image source={{ uri: BASE_URL + '/upload/' + imageUri }} style={{
@@ -151,6 +154,13 @@ export default class BatdongsanDetail extends Component {
                     <View style={styles.viewInfo}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Image source={iconAvatar} />
+                            {/* {
+                               data.data.Image != "" 
+                                ? 
+                                <Image style = {{}} source = {{uri: BASE_URL + '/upload/' + data.data.Image}}/>
+                                :
+                                <Image source={iconAvatar} /> 
+                            } */}
                             <View style={{ flex: 1, marginLeft: 16, justifyContent: 'center' }}>
                                 <View style={{ flexDirection: 'row' }}>
                                     <Icon name="call-outline" style={styles.iconDate} />
@@ -168,6 +178,27 @@ export default class BatdongsanDetail extends Component {
                         <Text style={{ fontSize: 14 }}>{description}</Text>
                     </View>
                 </ScrollView>
+                <View style = {{height:48, flexDirection:'row', borderTopColor:'#FFAA00', borderTopWidth:1}}>
+                            <View style = {{flex:1, backgroundColor:'#FFAA00', justifyContent:'center', alignItems:'center'}}>
+                                <TouchableOpacity onPress = {() => Communications.phonecall('+84363121782', true)} style = {{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                                <Icon name="call" style={styles.iconPhone} />
+                                <Text style = {{
+                                     fontSize: 16, color: 'white', fontWeight: '600', marginLeft:4 
+                                }}>Gọi điện</Text>
+                                </TouchableOpacity>
+                                   
+                            </View>
+                            <View style = {{flex:1, backgroundColor:'white',justifyContent:'center', alignItems:'center'}}>
+                                <TouchableOpacity onPress = {() => Communications.text('+84363121782')} style = {{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                                <Icon name="mail" style={styles.iconMess} />
+                                <Text style = {{
+                                    fontSize: 16, color: '#FFAA00', fontWeight: '600',
+                                    marginLeft:4
+                                }}>Gửi SMS</Text>
+                                </TouchableOpacity>
+                            </View>
+                            
+                </View>
                 {
                     showEdit == true
                         ?

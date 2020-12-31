@@ -98,7 +98,7 @@ export default class HomeScreen extends Component {
         })
     }
     onRefresh = () => {
-        this.getDataCategory()
+        this.getDataCategory
     }
     render() {
         const { dataAPI, refreshing } = this.state
@@ -123,24 +123,19 @@ export default class HomeScreen extends Component {
                         <View style={{ flex: 1, backgroundColor: '#ffffff', justifyContent: 'center', alignItems: 'center' }}>
                             <ActivityIndicator />
                         </View> :
-                        <ScrollView refreshControl={
-                            <RefreshControl onRefresh={this.onRefresh} refreshing={refreshing} />
-                        } showsVerticalScrollIndicator={false} style={styles.viewPrimary}>
-
-                            <Text style={styles.title}>Khám phá danh mục</Text>
-                            <FlatList
+                        <View style = {{flex:1, backgroundColor:'#ffffff', paddingHorizontal:16}}>
+                                <Text style={styles.title}>Khám phá danh mục</Text>
+                                 <FlatList
                                 style={styles.viewFlatList}
                                 data={dataAPI}
                                 renderItem={this._renderItem}
                                 numColumns={numColumns}
                                 showsVerticalScrollIndicator={false}
+                                // refreshControl = {<RefreshControl onRefresh={this.onRefresh} refreshing={refreshing} />}
                                 keyExtractor={(item, index) => index.toString()}
-                            />
-                        </ScrollView>
-
-
+                                />
+                        </View>
                     }
-
                 </View>
             </View>
         )
