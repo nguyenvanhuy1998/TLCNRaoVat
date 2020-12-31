@@ -87,7 +87,7 @@ export default class PostStepThird extends Component {
        
         return (
             <View style={styles.container}>
-                <Header noSearch onPress={() => navigation.pop()} title="Nhập thông tin bài đăng" />
+                <Header noSearch onPress={() => navigation.pop()} title={showFinishEdit == true ? "Cập nhật thông tin" : "Nhập thông tin bài đăng"} />
                 <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator={false} alwaysBounceVertical={false}>
 
                     <ViewTextInputPost
@@ -155,9 +155,11 @@ export default class PostStepThird extends Component {
                     </View> */}
                 </ScrollView>
                 {
-                     (title != '' && description != '' && price != '' && address != '' && phone != '' && city != '')
-                      ? 
-                      <TouchableOpacity onPress = {() => {
+                    !showFinishEdit ? 
+                    <TouchableOpacity disabled = {
+                        (title != '' && description != '' && price != '' && address != '' && phone != '' && city != '') 
+                        ? false : true
+                    } onPress = {() => {
                         navigation.navigate("PostStepFour", {
                             dataCategory: dataCategory,
                             title: title,
@@ -170,41 +172,24 @@ export default class PostStepThird extends Component {
                     }} style = {{
                         height:48,
                          alignItems:'center', justifyContent:'center',
+                         backgroundColor:  (title != '' && description != '' && price != '' && address != '' && phone != '' && city != '')  ? colors.headerColor : 'grey'
+                    }}>
+                            <Text style = {{
+                                  fontSize:24,
+                                  color:'white', fontWeight:'bold'
+                            }}>Tiếp theo</Text>
+                    </TouchableOpacity> :
+                    <TouchableOpacity onPress={this.editFinish} style = {{
+                        height:48,
+                         alignItems:'center', justifyContent:'center',
                          backgroundColor: colors.headerColor
                     }}>
                             <Text style = {{
                                   fontSize:24,
                                   color:'white', fontWeight:'bold'
-                            }}>Tiếp theo</Text>
-                    </TouchableOpacity> : 
-
-                     <TouchableOpacity disabled style = {{
-                         backgroundColor:'grey', height:48,
-                         alignItems:'center', justifyContent:'center',
-                        
-                    }}>
-                            <Text style = {{
-                                  fontSize:24,
-                                  color:'white', fontWeight:'bold'
-                            }}>Tiếp theo</Text>
+                            }}>Hoàn thành</Text>
                     </TouchableOpacity>
                 }
-              
-                {/* {
-                    !showFinishEdit
-                        ?
-                        <ButtonStep onPress={() => navigation.navigate("PostStepFour", {
-                            dataCategory: dataCategory,
-                            title: title,
-                            description: description,
-                            price: price,
-                            address: address,
-                            phone: phone,
-                            city: city
-                        })} name="Tiếp theo" />
-                        :
-                        <ButtonStep onPress={this.editFinish} name="Hoàn thành" />
-                } */}
 
 
             </View>

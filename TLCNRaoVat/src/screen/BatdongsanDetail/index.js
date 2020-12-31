@@ -66,7 +66,7 @@ export default class BatdongsanDetail extends Component {
     }
     deleteFinish = () => {
         const postId = this.props.route?.params?.dataPost?._id
-        const {navigation} = this.props
+        const { navigation } = this.props
         var axios = require('axios');
         var qs = require('qs');
         var data = qs.stringify({
@@ -80,12 +80,12 @@ export default class BatdongsanDetail extends Component {
             },
             data: data
         };
-        helper.alert("Thông báo", "Bạn có chắc chắn muốn xóa bài đăng này?", () => {
+        helper.confirm("Thông báo", "Bạn có chắc chắn muốn xóa bài đăng này?", () => {
             axios(config)
                 .then(function (response) {
-                    if(response.data.kq == 1){
+                    if (response.data.kq == 1) {
                         navigation.navigate("Post")
-                    }else {
+                    } else {
                         console.log("Xóa thất bại")
                     }
                 })
@@ -99,7 +99,7 @@ export default class BatdongsanDetail extends Component {
         const { navigation } = this.props
         const { imageUri, title, price, datePost, phone, address, description, showEdit } = this.state
         const data = this.props.route?.params
-    
+
         // const listCarousel = [
         //     data.image_first,
         //     data.image_second,
@@ -108,7 +108,7 @@ export default class BatdongsanDetail extends Component {
         return (
             <View style={styles.container}>
                 <Header onPress={() => navigation.pop()} noSearch title="Thông tin chi tiết" />
-                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator = {false}>
+                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                     <View style={{ backgroundColor: 'white' }}>
                         <View style={styles.slide}>
                             <Image source={{ uri: BASE_URL + '/upload/' + imageUri }} style={{
@@ -176,44 +176,56 @@ export default class BatdongsanDetail extends Component {
                         <Text style={{ fontSize: 14 }}>{description}</Text>
                     </View>
                 </ScrollView>
-                <View style = {{height:48, flexDirection:'row', borderTopColor:'#FFAA00', borderTopWidth:1}}>
-                            <View style = {{flex:1, backgroundColor:'#FFAA00', justifyContent:'center', alignItems:'center'}}>
-                                <TouchableOpacity onPress = {() => Communications.phonecall('+84363121782', true)} style = {{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                                <Icon name="call" style={styles.iconPhone} />
-                                <Text style = {{
-                                     fontSize: 16, color: 'white', fontWeight: '600', marginLeft:4 
-                                }}>Gọi điện</Text>
-                                </TouchableOpacity>
-                                   
-                            </View>
-                            <View style = {{flex:1, backgroundColor:'white',justifyContent:'center', alignItems:'center'}}>
-                                <TouchableOpacity onPress = {() => Communications.text('+84363121782')} style = {{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                                <Icon name="mail" style={styles.iconMess} />
-                                <Text style = {{
-                                    fontSize: 16, color: '#FFAA00', fontWeight: '600',
-                                    marginLeft:4
-                                }}>Gửi SMS</Text>
-                                </TouchableOpacity>
-                            </View>
-                            
-                </View>
                 {
                     showEdit == true
                         ?
-                        <View style={styles.viewButton}>
-                            <TouchableOpacity style={styles.viewButtonCall} onPress={() => navigation.navigate("PostStepThird", {
-                                dataPost: data
-                            })}>
-                                <Icon name="create" style={styles.iconPhone} />
-                                <Text style={styles.textCall}>Chỉnh sửa</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.deleteFinish} style={styles.viewButtonMess}>
-                                <Icon name="trash" style={styles.iconMess} />
-                                <Text style={styles.textMess}>Xóa</Text>
-                            </TouchableOpacity>
+                        <View style={{ height: 48, flexDirection: 'row', borderTopColor: '#FFAA00', borderTopWidth: 1 }}>
+                            <View style={{ flex: 1, backgroundColor: '#FFAA00', justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => {
+                                    navigation.navigate("PostStepThird", {
+                                        dataPost: data,
+                                    })
+                                }} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name="create" style={styles.iconPhone} />
+                                    <Text style={{
+                                        fontSize: 16, color: 'white', fontWeight: '600', marginLeft: 4
+                                    }}>Chỉnh sửa</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                            <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={this.deleteFinish} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name="trash" style={styles.iconMess} />
+                                    <Text style={{
+                                        fontSize: 16, color: '#FFAA00', fontWeight: '600',
+                                        marginLeft: 4
+                                    }}>Xóa</Text>
+                                </TouchableOpacity>
+                            </View>
+
                         </View>
                         :
-                        null
+                        <View style={{ height: 48, flexDirection: 'row', borderTopColor: '#FFAA00', borderTopWidth: 1 }}>
+                            <View style={{ flex: 1, backgroundColor: '#FFAA00', justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => Communications.phonecall('+84363121782', true)} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name="call" style={styles.iconPhone} />
+                                    <Text style={{
+                                        fontSize: 16, color: 'white', fontWeight: '600', marginLeft: 4
+                                    }}>Gọi điện</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                            <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => Communications.text('+84363121782')} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name="mail" style={styles.iconMess} />
+                                    <Text style={{
+                                        fontSize: 16, color: '#FFAA00', fontWeight: '600',
+                                        marginLeft: 4
+                                    }}>Gửi SMS</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                        </View>
                 }
             </View>
         )
