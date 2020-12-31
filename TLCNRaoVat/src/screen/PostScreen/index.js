@@ -159,7 +159,7 @@ export default class PostScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <Header noBack title={'Bài đăng'} />
+                <Header noBack noSearch title={'Bài đăng'} />
                 {
                     user != null
                         ?

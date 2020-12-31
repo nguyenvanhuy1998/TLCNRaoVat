@@ -102,9 +102,9 @@ export default class LoginScreen extends Component {
                             <Text>Bạn chưa có tài khoản?</Text>
                             <Text style={styles.textRegister}>Đăng ký</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress = {() => navigation.navigate('ForgotPassword')} style={{ alignItems: 'center' }}>
+                        {/* <TouchableOpacity onPress = {() => navigation.navigate('ForgotPassword')} style={{ alignItems: 'center' }}>
                             <Text style={styles.textRegister}>Quên mật khẩu?</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                     </View>
                 </ImageBackground>

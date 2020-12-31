@@ -8,6 +8,7 @@ import ButtonStep from '../../components/ButtonStep'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
+import colors from '../../styles/colors'
 
 export default class PostStepThird extends Component {
     constructor(props) {
@@ -20,7 +21,8 @@ export default class PostStepThird extends Component {
             address: "",
             phone: "",
             city: "",
-            showFinishEdit: false
+            showFinishEdit: false,
+            next: true
             // title:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
     }
@@ -81,11 +83,11 @@ export default class PostStepThird extends Component {
     render() {
         const { navigation } = this.props
         const dataCategory = this.props.route?.params
-        const { title, description, price, address, phone, city, showFinishEdit } = this.state
-
+        const { title, description, price, address, phone, city, showFinishEdit, next } = this.state
+       
         return (
             <View style={styles.container}>
-                <Header onPress={() => navigation.pop()} title="Cập nhật thông tin" />
+                <Header noSearch onPress={() => navigation.pop()} title="Nhập thông tin bài đăng" />
                 <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator={false} alwaysBounceVertical={false}>
 
                     <ViewTextInputPost
@@ -153,6 +155,42 @@ export default class PostStepThird extends Component {
                     </View> */}
                 </ScrollView>
                 {
+                     (title != '' && description != '' && price != '' && address != '' && phone != '' && city != '')
+                      ? 
+                      <TouchableOpacity onPress = {() => {
+                        navigation.navigate("PostStepFour", {
+                            dataCategory: dataCategory,
+                            title: title,
+                            description: description,
+                            price: price,
+                            address: address,
+                            phone: phone,
+                            city: city
+                        })
+                    }} style = {{
+                        height:48,
+                         alignItems:'center', justifyContent:'center',
+                         backgroundColor: colors.headerColor
+                    }}>
+                            <Text style = {{
+                                  fontSize:24,
+                                  color:'white', fontWeight:'bold'
+                            }}>Tiếp theo</Text>
+                    </TouchableOpacity> : 
+
+                     <TouchableOpacity disabled style = {{
+                         backgroundColor:'grey', height:48,
+                         alignItems:'center', justifyContent:'center',
+                        
+                    }}>
+                            <Text style = {{
+                                  fontSize:24,
+                                  color:'white', fontWeight:'bold'
+                            }}>Tiếp theo</Text>
+                    </TouchableOpacity>
+                }
+              
+                {/* {
                     !showFinishEdit
                         ?
                         <ButtonStep onPress={() => navigation.navigate("PostStepFour", {
@@ -166,7 +204,7 @@ export default class PostStepThird extends Component {
                         })} name="Tiếp theo" />
                         :
                         <ButtonStep onPress={this.editFinish} name="Hoàn thành" />
-                }
+                } */}
 
 
             </View>

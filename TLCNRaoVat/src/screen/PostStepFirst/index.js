@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import { dataHome } from '../../Data'
@@ -10,7 +10,8 @@ export default class PostStepFirst extends Component {
     constructor(props){
         super(props)
         this.state = {
-            dataAPI:null
+            dataAPI:null,
+            isLoading: false
         }
     }
 
@@ -26,10 +27,13 @@ export default class PostStepFirst extends Component {
             headers: {},
             data: data
         };
-        
+        this.setState({
+            isLoading: true
+        })
         axios(config)
             .then((response) => {
                 this.setState({
+                    isLoading:false,
                     dataAPI: response?.data.CateList
                 })
             })
@@ -57,7 +61,8 @@ export default class PostStepFirst extends Component {
         const {dataAPI} = this.state
         return (
             <View style={styles.container}>
-                <Header title="Chọn danh mục" onPress={() => navigation.pop()} />
+                <Header noSearch title="Chọn danh mục" onPress={() => navigation.pop()} />
+                {this.state.isLoading && <ActivityIndicator/>}
                 <FlatList data={dataAPI}
                     alwaysBounceVertical = {false}
                     showsVerticalScrollIndicator = {false}

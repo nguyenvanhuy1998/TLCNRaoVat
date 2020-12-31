@@ -9,6 +9,7 @@ import ImagePicker from 'react-native-image-picker';
 import { IS_IOS } from '../../Constants'
 import { BASE_URL } from '../../network/config'
 import helper from '../../helper'
+import metrics from '../../styles/metrics'
 // import fs from 'fs'
 const options = {
     title: "Chọn hình ảnh",
@@ -121,7 +122,7 @@ export default class PostStepFour extends Component {
         const { filePath, isLoading } = this.state
         return (
             <View style={styles.container}>
-                <Header onPress={() => navigation.pop()} title="Chọn ảnh" />
+                <Header noSearch onPress={() => navigation.pop()} title="Chọn ảnh" />
                 <View style={{
                     flex: 1,
                     backgroundColor: 'white'
@@ -159,8 +160,21 @@ export default class PostStepFour extends Component {
                     </View>
 
                 </View>
-                <ButtonStep onPress={this._submitPost} name="Đăng bài" />
-
+                {filePath != '' ? 
+                     <ButtonStep onPress={this._submitPost} name="Đăng bài" />
+                    :  <TouchableOpacity disabled style = {{
+                        backgroundColor:'grey',
+                        paddingVertical:15,
+                        alignItems:'center',
+                        marginBottom:metrics.safePadding
+                    }}>
+                        <Text style = {{
+                            fontSize:24,
+                            color:'white', fontWeight:'bold'
+                        }}>Đăng bài</Text>
+                    </TouchableOpacity>
+                }
+               
             </View>
         )
     }

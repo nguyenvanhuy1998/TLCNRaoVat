@@ -101,7 +101,7 @@ export default class HelpScreen extends Component {
        
         return (
             <View style={styles.container}>
-                <Header noBack title={'Hỗ trợ'} />
+                <Header noSearch noBack title={'Hỗ trợ'} />
                 {
                     user != null
                         ?

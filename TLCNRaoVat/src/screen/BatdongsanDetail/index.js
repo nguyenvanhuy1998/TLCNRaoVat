@@ -99,9 +99,7 @@ export default class BatdongsanDetail extends Component {
         const { navigation } = this.props
         const { imageUri, title, price, datePost, phone, address, description, showEdit } = this.state
         const data = this.props.route?.params
-        console.log('====================================');
-        console.log("data", data.data.Image);
-        console.log('====================================');
+    
         // const listCarousel = [
         //     data.image_first,
         //     data.image_second,

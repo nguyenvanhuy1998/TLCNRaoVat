@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
 import Header from '../../components/Header'
 import { BASE_URL } from '../../network/config'
 
@@ -7,7 +7,8 @@ export default class DataCityScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataCity: null
+            dataCity: null,
+            isLoading: false
         }
     }
     componentDidMount() {
@@ -22,12 +23,15 @@ export default class DataCityScreen extends Component {
             headers: {},
             data: data
         };
-
+        this.setState({
+            isLoading: true
+        })
         axios(config)
             .then((response) => {
                
                 if (response.data.kq == 1) {
                     this.setState({
+                        isLoading: false,
                         dataCity: response.data.list
                     })
                 }
@@ -59,6 +63,7 @@ export default class DataCityScreen extends Component {
         return (
             <View style={styles.container}>
                 <Header noSearch title="Chọn thành phố" onPress={() => navigation.pop()} />
+                {this.state.isLoading && <ActivityIndicator/>}
                 <FlatList
                     style={{flex:1, backgroundColor:'white'}}
                     data={dataCity}

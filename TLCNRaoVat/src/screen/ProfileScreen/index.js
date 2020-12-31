@@ -201,7 +201,7 @@ export default class ProfileScreen extends Component {
         const { navigation } = this.props
         return (
             <View style={styles.container}>
-                <Header noBack title={'Thông tin cá nhân'} />
+                <Header noSearch noBack title={'Thông tin cá nhân'} />
                 {
                     user != null
                         ?
