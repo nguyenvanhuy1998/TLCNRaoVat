@@ -178,7 +178,9 @@ export default class Batdongsan extends Component {
                 {this.state.isLoading && <ActivityIndicator/>}
                 <FlatList
                     style={{ marginHorizontal: 16, paddingTop: 16 }}
-                    data={dataAPI}
+                    data={dataAPI.sort(function(a,b){
+                        return new Date(b.NgayDang) - new Date(a.NgayDang)
+                    })}
                     numColumns={2}
                     renderItem={this._renderItemPrimary}
                     keyExtractor={(item, index) => index.toString()}

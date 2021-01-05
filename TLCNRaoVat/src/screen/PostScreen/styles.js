@@ -72,15 +72,10 @@ export default StyleSheet.create({
       overflow:'hidden',
     },
     btnPost:{
-      position: 'absolute',
-      width: metrics.width - 32,
-      height: 48,
-      borderRadius: 8,
-      left:16,
-      backgroundColor: colors.headerColor,
-      bottom: metrics.safePadding,
-      justifyContent: 'center',
-      alignItems: 'center'
+        height:48,
+        backgroundColor:'#FFAA00',
+        justifyContent:'center', alignItems:'center',
+        
     },
     viewHeight:{
       height: 0.5, width: "100%", backgroundColor: '#E5E5E5'
@@ -96,7 +91,8 @@ export default StyleSheet.create({
     },
     dangbai:{
       fontSize:16,
-      color:'white'
+      color:'white',
+      fontWeight:'bold'
     }
     
 })

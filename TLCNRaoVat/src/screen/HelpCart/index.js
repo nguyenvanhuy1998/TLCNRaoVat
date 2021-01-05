@@ -8,7 +8,7 @@ export default class HelpCart extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header title={"Hỗ trợ người mua"} onPress={() => this.props.navigation.pop()} />
+                <Header noSearch title={"Hỗ trợ người mua"} onPress={() => this.props.navigation.pop()} />
                 <HelpShopAndCart data = {this.props.route.params.dataCart}/>
             </View>
         )

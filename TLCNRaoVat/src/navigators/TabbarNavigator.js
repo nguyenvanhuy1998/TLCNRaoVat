@@ -16,19 +16,19 @@ export default function TabHome() {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
-                    if (route.name === 'Home') {
+                    if (route.name === 'Trang chủ') {
                         iconName = focused
                             ? iconHome
                             : iconHomeLine;
-                    } else if (route.name === 'Post') {
+                    } else if (route.name === 'Bài đăng') {
                         iconName = focused
                             ? iconPost
                             : iconPostLine
-                    } else if (route.name === 'Help') {
+                    } else if (route.name === 'Hỗ trợ') {
                         iconName = focused
                             ? iconHelp
                             : iconHelpLine
-                    } else if (route.name == 'Profile') {
+                    } else if (route.name == 'Tài khoản') {
                         iconName = focused
                             ? iconProfile
                             : iconProfileLine
@@ -48,10 +48,10 @@ export default function TabHome() {
             
             }}
         >
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Post" component={PostScreen} />
-            <Tab.Screen name="Help" component={HelpScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Trang chủ" component={HomeScreen} />
+            <Tab.Screen name="Bài đăng" component={PostScreen} />
+            <Tab.Screen name="Hỗ trợ" component={HelpScreen} />
+            <Tab.Screen name="Tài khoản" component={ProfileScreen} />
         </Tab.Navigator>
     );
 }

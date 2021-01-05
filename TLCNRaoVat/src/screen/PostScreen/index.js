@@ -121,7 +121,7 @@ export default class PostScreen extends Component {
     }
     _renderItem = ({ item, index }) => {
         const { nameCity } = this.state
-        const name = nameCity.find(x => x._id == item.Thanhpho).Name
+        const name = nameCity?.find(x => x._id == item.Thanhpho).Name
         const {navigation} = this.props
         return (
             <TouchableOpacity onPress = {() => navigation.navigate("BatdongsanDetail", {
@@ -163,7 +163,8 @@ export default class PostScreen extends Component {
                 {
                     user != null
                         ?
-                        <View style={{ flex: 1, }}>
+                        <View style={{ flex: 1}}>
+                            <View style = {{flex:1}}>
                             {
                                 !dataPostSingle.length
                                     ?
@@ -172,7 +173,9 @@ export default class PostScreen extends Component {
                                         <Text style={styles.emptyText}>Bạn chưa có bài đăng nào</Text>
                                     </View>
                                     :
-                                    <FlatList data={dataPostSingle}
+                                    <FlatList data={dataPostSingle.sort(function(a,b){
+                                        return new Date(b.NgayDang) - new Date(a.NgayDang)
+                                    })}
                                         style={{ flex: 1, marginHorizontal: 16, paddingTop: 16 }}
                                         renderItem={this._renderItem}
                                         keyExtractor={(item, index) => item._id.toString()}
@@ -180,6 +183,8 @@ export default class PostScreen extends Component {
                                         refreshControl={<RefreshControl onRefresh={this.onRefresh} refreshing={refreshing} />}
                                     />
                             }
+                            </View>
+                         
                             <TouchableOpacity style={styles.btnPost} onPress={() => navigation.navigate("PostStepFirst", { user: user.IdUser })}>
                                 <Text style={styles.dangbai}>ĐĂNG BÀI</Text>
                             </TouchableOpacity>

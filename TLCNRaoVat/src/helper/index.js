@@ -21,5 +21,13 @@ export default Helper = {
       ] : undefined,
       { cancelable: false });
   },
+  confirm(title, message, callback, onCancel) {
+    Alert.alert(title, message,
+        [
+            { text: 'Hủy', style: 'cancel', onPress: onCancel },
+            { text: 'Chấp nhận', onPress: callback },
+        ],
+        { cancelable: false });
+}
  
 }
