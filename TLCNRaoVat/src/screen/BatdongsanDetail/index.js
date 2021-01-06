@@ -84,7 +84,7 @@ export default class BatdongsanDetail extends Component {
             axios(config)
                 .then(function (response) {
                     if (response.data.kq == 1) {
-                        navigation.navigate("Post")
+                        navigation.navigate("Bài đăng")
                     } else {
                         console.log("Xóa thất bại")
                     }

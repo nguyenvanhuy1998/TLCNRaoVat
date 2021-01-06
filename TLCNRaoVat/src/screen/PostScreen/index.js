@@ -93,9 +93,9 @@ export default class PostScreen extends Component {
                                     data: dataPost
                                 }
                                 axios(configPost)
-                                    .then((resPost) => {
+                                    .then(async (resPost) => {
                                         if (resPost.data.kq == 1) {
-                                            let dataPostList = resPost.data.PostList
+                                            let dataPostList = await resPost.data.PostList.filter(x => x.Active == true)
                                             this.setState({
                                                 dataPostSingle: dataPostList.filter(x => x.UserId == dataUser.IdUser)
                                             })
@@ -154,7 +154,6 @@ export default class PostScreen extends Component {
     }
     render() {
         const { refreshing, user, dataPostSingle} = this.state
-        
         const { navigation } = this.props
 
         return (

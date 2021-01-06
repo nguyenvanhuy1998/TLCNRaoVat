@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, ScrollView, TextInput, ActivityIndicator } from 'react-native'
+import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity,RefreshControl, ScrollView, TextInput, ActivityIndicator } from 'react-native'
 import styles from './styles'
 import Header from '../../components/Header'
 import { dataTitleBatdongsan, dataBatdongsan } from '../../Data'
@@ -19,7 +19,8 @@ export default class Batdongsan extends Component {
             temp: [],
             searchText: '',
             city:'Tất cả',
-            isLoading: false
+            isLoading: false,
+            refreshing: false
 
         }
     }
@@ -45,10 +46,11 @@ export default class Batdongsan extends Component {
 
                 if (resPost.data.kq == 1) {
                     const { IdCategory } = this.props.route?.params
-                    let dataPostList = await resPost.data.PostList.filter(x => x.Nhomsanpham == IdCategory)
+                    let dataPostList = await resPost.data.PostList.filter(x => x.Active == true)
+                    
                     this.setState({
-                        dataAPI: [...this.state.dataAPI, ...dataPostList],
-                        temp: [...this.state.temp, ...dataPostList]
+                        dataAPI: [...this.state.dataAPI, ...dataPostList.filter(x => x.Nhomsanpham == IdCategory)],
+                        temp: [...this.state.temp, ...dataPostList.filter(x => x.Nhomsanpham == IdCategory)]
                     })
                     var dataCity = qs.stringify({
 
@@ -136,14 +138,12 @@ export default class Batdongsan extends Component {
      
         
     }
+    
     render() {
         const { navigation } = this.props
         const { NameCategory } = this.props?.route?.params
 
-        const { dataAPI } = this.state
-        console.log('====================================');
-        console.log("dataAPIRender", dataAPI);
-        console.log('====================================');
+        const { dataAPI, refreshing } = this.state
         return (
             <View style={styles.container}>
                 <View style={styles.wrapper}>

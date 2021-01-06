@@ -73,7 +73,7 @@ export default class PostStepThird extends Component {
 
         axios(config)
             .then((response) =>  {
-                helper.alert("Thông báo", "Cập nhật bài viết thành công", () => this.props.navigation.navigate("Post"))
+                helper.alert("Thông báo", "Cập nhật bài viết thành công", () => this.props.navigation.navigate("Bài đăng"))
             })
             .catch(function (error) {
                 console.log(error);
