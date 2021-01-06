@@ -105,7 +105,7 @@ export default class PostStepFour extends Component {
         axios(config)
         .then(function (response) {
             if(response.data.kq == 1){
-                helper.alert("Thông báo", response.data.errMsg, () => navigation.navigate("Home"))
+                helper.alert("Thông báo", "Bài đăng của bạn đang được xét duyệt, Vui lòng chờ!", () => navigation.navigate("Home"))
             }else {
 
             }
